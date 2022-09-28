@@ -1,5 +1,6 @@
+import Gameboard from './pages/Gameboard';
 function App() {
-  return <div className='App'></div>;
+  return <Gameboard />;
 }
 
 export default App;
