@@ -4,14 +4,14 @@ import styled from 'styled-components';
 function Card({ cart, setSelectedCards }) {
   return (
     <Frame
-      enabled={cart.enabled}
+      displayed={cart.displayed}
       onClick={() =>
-        cart.enabled ? setSelectedCards((prev) => [...prev, cart]) : null
+        cart.displayed ? setSelectedCards((prev) => [...prev, cart]) : null
       }
     >
       <img
         src={
-          cart.enabled
+          cart.displayed
             ? `images/CardsFaces/${cart.category}/${cart.category}${
                 cart.id < 10 ? '0' + cart.id : cart.id
               }.png`
@@ -25,7 +25,7 @@ function Card({ cart, setSelectedCards }) {
 
 const Frame = styled.div`
   width: 4rem;
-  cursor: ${({ enabled }) => (enabled ? 'pointer' : 'auto')};
+  cursor: ${({ displayed }) => (displayed ? 'pointer' : 'auto')};
   img {
     width: 100%;
     border-radius: 0.4rem;

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Card from './Card';
 
 function ArrangePile({ pile, setSelectedCards }) {
-  pile[pile?.length - 1].enabled = true;
 
   return (
     <Pile>
