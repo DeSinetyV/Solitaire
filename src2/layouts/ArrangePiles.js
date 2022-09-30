@@ -3,24 +3,26 @@ import styled from 'styled-components';
 import ArrangePile from '../components/ArrangePile';
 import { arrangingCards, distributeCarts } from '../utils';
 
-function ArrangePiles({ arrangePileCards, boardClick, setBoardClick,selectedCards,setSelectedCards}) {
+function ArrangePiles({arrangePileCards,selectedCards, setSelectedCards }) {
   const [cards, setCards] = useState(distributeCarts(arrangePileCards));
-  // const [selectedCards, setSelectedCards] = useState([]);
+  //  const [selectedCards, setSelectedCards] = useState([]);
+  console.log(selectedCards);
   useEffect(() => {
-    console.log(selectedCards);
+    // console.log([1].indexOf(1));
 
     //    console.log('random select :', selectedCards);
     if (selectedCards.length === 2) {
-      arrangingCards(cards, selectedCards, setCards);
-      setSelectedCards([]);
-    }
-    if (boardClick) {
-      if (selectedCards.length > 0) {
+      if (
+        selectedCards[0].id + 1 === selectedCards[1].id &&
+        selectedCards[0].color !== selectedCards[1].color
+      ) {
+        setCards(arrangingCards(cards, selectedCards));
+        setSelectedCards([]);
+      } else {
         setSelectedCards([]);
       }
-      setBoardClick(false);
     }
-  }, [selectedCards, cards, boardClick, setBoardClick]);
+  }, [selectedCards, cards]);
 
   return (
     <Container>
@@ -29,9 +31,7 @@ function ArrangePiles({ arrangePileCards, boardClick, setBoardClick,selectedCard
           <ArrangePile
             key={i}
             pile={pile}
-            pileIndex={i.toString()}
             setSelectedCards={setSelectedCards}
-            selectedCards={selectedCards}
           />
         );
       })}

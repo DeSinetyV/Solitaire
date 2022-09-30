@@ -1,9 +1,18 @@
-import React from 'react'
+import { React} from 'react';
+import CardPlaceholder from './CardPlaceholder';
 
-function GoalPile() {
+function GoalPile(pile, setSelectedCards, selectedCards, pileIndex) {
+
+ 
   return (
-    <div>GoalPile</div>
-  )
+    <div
+      onClick={() => {
+        setSelectedCards((prev) => [...prev, pileIndex]);
+      }}
+    >
+      <CardPlaceholder />
+    </div>
+  );
 }
 
 export default GoalPile
