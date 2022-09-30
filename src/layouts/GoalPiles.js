@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CardPlaceholder from '../components/CardPlaceholder';
 
 function GoalPiles() {
+
   return (
     <Container>
       <CardPlaceholder />

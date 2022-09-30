@@ -1,8 +1,6 @@
 import React from 'react';
 
-function PickPiles({pickPileCards}) {
-
-  console.log(pickPileCards);
+function PickPiles({ pickPileCards }) {
   return <div>PickPiles</div>;
 }
 

@@ -11,26 +11,46 @@ export function distributeCarts(arr) {
   resultArr.map((pile) => (pile[pile.length - 1].displayed = true));
   return resultArr;
 }
-
-export function arrangingCards(cards, selectedCards) {
+// arranging cards from a pile to another pile by (adding and removing cards)
+export function arrangingCards(cards, selectedCards, setCards) {
   let arr = [];
-  cards.map((pile) => {
-    if (pile.includes(selectedCards[0])) {
-      arr = pile.slice(pile.indexOf(selectedCards[0]));
+  if (
+    (selectedCards[0].id + 1 === selectedCards[1].id &&
+      selectedCards[0].color !== selectedCards[1].color) ||
+    typeof selectedCards[1] === 'string'
+  ) {
+    cards.map((pile) => {
+      if (pile.includes(selectedCards[0])) {
+        arr = pile.slice(pile.indexOf(selectedCards[0]));
+      }
+      return pile;
+    });
+    const res = cards.map((pile, i) => {
+      if (pile.includes(selectedCards[0])) {
+        pile.splice(pile.indexOf(selectedCards[0]));
+      }
+      if (
+        pile.includes(selectedCards[1]) ||
+        selectedCards[1] === i.toString()
+      ) {
+        pile = [...pile, ...arr];
+      }
+      // display the last card of each pile by adding displayed property
+      if (pile.length > 0 && !pile[pile.length - 1].displayed) {
+        pile[pile.length - 1].displayed = true;
+      }
+      return pile;
+    });
+    setCards(res);
+  }
+}
+
+// add selected property to the displayed cards for highlighting them
+export function addSelectedToCards(pile, selectedCards) {
+  pile.map((card, i) => {
+    if (i >= pile.indexOf(selectedCards[0])) {
+      card.selected = true;
     }
-    return pile;
+    return card;
   });
-  const res = cards.map((pile) => {
-    if (pile.includes(selectedCards[0])) {
-      pile.splice(pile.indexOf(selectedCards[0]));
-    }
-    if (pile.includes(selectedCards[1])) {
-      pile = [...pile, ...arr];
-    }
-    if (pile.length > 0 && !pile[pile.length - 1].displayed) {
-      pile[pile.length - 1].displayed = true;
-    }
-    return pile;
-  });
-  return res;
 }
