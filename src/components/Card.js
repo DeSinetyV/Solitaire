@@ -1,15 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Card({ cart, setSelectedCards } ) {
+function Card({ cart, setSelectedCards }) {
   // console.log(cart);
   return (
     <Frame
       displayed={cart.displayed}
       selected={cart.selected}
-      onClick={() =>
-        cart.displayed ? setSelectedCards((prev) => [...prev, cart]) : null
-      }
+      onClick={(e) => {
+        if (cart.displayed) {
+          e.stopPropagation();
+          setSelectedCards((prev) => [...prev, cart]);
+        }
+      }}
     >
       <img
         src={

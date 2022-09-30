@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ArrangePile from '../components/ArrangePile';
 import { arrangingCards, distributeCarts } from '../utils';
 
-function ArrangePiles({ arrangePileCards }) {
+function ArrangePiles({ arrangePileCards, boardClick, setBoardClick }) {
   const [cards, setCards] = useState(distributeCarts(arrangePileCards));
   const [selectedCards, setSelectedCards] = useState([]);
   useEffect(() => {
@@ -12,7 +12,13 @@ function ArrangePiles({ arrangePileCards }) {
       arrangingCards(cards, selectedCards, setCards);
       setSelectedCards([]);
     }
-  }, [selectedCards, cards]);
+    if (boardClick) {
+      if (selectedCards.length > 0) {
+        setSelectedCards([]);
+      }
+      setBoardClick(false);
+    }
+  }, [selectedCards, cards, boardClick, setBoardClick]);
 
   return (
     <Container>
