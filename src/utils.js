@@ -34,3 +34,7 @@ export function arrangingCards(cards, selectedCards) {
   });
   return res;
 }
+
+export function drawCards() {
+  
+}
