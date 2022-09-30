@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 function CardPlaceholder() {
-  return <Placeholder></Placeholder>;
+  return <Placeholder />;
 }
 
 const Placeholder = styled.div`

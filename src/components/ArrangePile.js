@@ -14,10 +14,11 @@ function ArrangePile({ pile, setSelectedCards, selectedCards, pileIndex }) {
   if (pile.length > 0) {
     return (
       <Pile>
-        {pile.map((cart) => (
+        {pile.map((cart, i) => (
           <Card
             key={`${cart.id}${cart.category}`}
             cart={cart}
+            cartIndex={i.toString()}
             setSelectedCards={setSelectedCards}
           />
         ))}
@@ -35,6 +36,10 @@ function ArrangePile({ pile, setSelectedCards, selectedCards, pileIndex }) {
   );
 }
 
-const Pile = styled.div``;
+const Pile = styled.div`
+  height: 200px;
+  width: 100px;
+  position: relative;
+`;
 
 export default ArrangePile;
