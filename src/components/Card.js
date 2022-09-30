@@ -36,7 +36,7 @@ const Frame = styled.div`
   position: absolute;
   top: ${({ cartIndex }) => `${Number(cartIndex) * 15}px`};
   img {
-    width: 100%;
+    width: 150px;
     border-radius: 0.4rem;
   }
 `;

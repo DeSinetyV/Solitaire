@@ -54,3 +54,7 @@ export function addSelectedToCards(pile, selectedCards) {
     return card;
   });
 }
+
+export function drawCards() {
+  
+}

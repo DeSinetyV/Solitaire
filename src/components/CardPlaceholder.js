@@ -6,8 +6,8 @@ function CardPlaceholder() {
 }
 
 const Placeholder = styled.div`
-  width: 4rem;
-  height: 6.5rem;
+  width: 150px;
+  height: 217px;
   border: 2px orange solid;
   border-radius: 0.6rem;
 `;
