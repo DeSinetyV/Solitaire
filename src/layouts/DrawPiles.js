@@ -8,13 +8,21 @@ function Draw({drawCard}) {
     const [pickPile, setPickPile] = useState([...drawCard])
     const [drawPile, setDrawPile] = useState([])
     const [compteur, setCompteur] = useState(0)
+    
+    console.log(compteur)
+    console.log(pickPile)
 
+    if(compteur === pickPile.length) {
+        setCompteur(0)
+    }
+    const pickCart = compteur === pickPile.length ? pickPile[0] : pickPile[compteur]
+    pickCart.displayed=true
     return (
             <div>
                <PileCard className='cart'  onClick={() => setCompteur(prev => prev+1)}><img className='cart' src='../../images/CardsFaces/back_card.jpg' alt = 'back' /></PileCard>
-                <DrawCard>
-                    <Card cart={pickPile[compteur].displayed='enabled'}/>
-                </DrawCard>
+            
+                    <Card cart={pickCart}/>
+            
             </div>
       );
 }

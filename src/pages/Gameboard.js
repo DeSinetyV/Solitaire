@@ -13,8 +13,11 @@ function Gameboard() {
   const [arrangePileCards, setArrangePileCards] = useState([
     ...cards.slice(0, 28),
   ]);
-  const [pickPileCards, setPickPileCards] = useState([...cards.slice(27, -1)]);
+  const [pickPileCards, setPickPileCards] = useState([...cards.slice(28)]);
   const [boardClick, setBoardClick] = useState(false);
+  // console.log(arrangePileCards)
+  // console.log(pickPileCards)
+  // console.log(CARDS)
   return (
     <GameboardContainer onClick={() => setBoardClick(true)}>
       <Board>
