@@ -1,12 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { useDrag } from 'react-dnd';
 
 
 function Card({ cart, setSelectedCards, cartIndex }) {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'CARD',
+    item: { cart: cart },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
 
   return (
     <Frame
+      isDragging={isDragging}
+      ref={drag}
       displayed={cart.displayed}
       selected={cart.selected}
       cartIndex={cartIndex}
@@ -30,16 +39,15 @@ function Card({ cart, setSelectedCards, cartIndex }) {
 }
 
 const Frame = styled.div`
-  .frame {
-  }
+  display: ${({ isDragging }) => (isDragging ? 'none' : 'auto')};
   width: 4rem;
   cursor: ${({ displayed }) => (displayed ? 'pointer' : 'auto')};
   box-shadow: ${({ selected }) => (selected ? '0 0 10px orange' : 'none')};
   border-radius: 0.4rem;
-  position: absolute;
-  top: ${({ cartIndex }) => `${Number(cartIndex) * 15}px`};
+  ${({ cartIndex }) =>
+    cartIndex ? `position: absolute; top: ${Number(cartIndex) * 15}px` : ''};
   img {
-    width: 150px;
+    width: 100px;
     border-radius: 0.4rem;
   }
 `;

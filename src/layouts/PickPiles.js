@@ -11,10 +11,10 @@ function PickPiles({pickPileCards}) {
 }
 
 const Pick = styled.div`
-  cursor : pointer;
+  cursor: pointer;
   width: 4rem;
   img {
-    width: 150px;
+    width: 100px;
     border-radius: 0.4rem;
   }
 `;
