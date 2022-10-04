@@ -8,7 +8,11 @@ export function distributeCarts(arr) {
       resultArr.push(arr.slice(count - i, count));
     }
   }
-  resultArr.map((pile) => (pile[pile.length - 1].displayed = true));
+  resultArr.map((pile) => {
+    // if(!pile[pile.length - 1].hasOwnProperty('displayed')) 
+    pile[pile.length - 1].displayed = true
+  return pile;
+  })
   return resultArr;
 }
 // arranging cards from a pile to another pile by (adding and removing cards)
@@ -55,3 +59,4 @@ export function addSelectedToCards(pile, selectedCards) {
   });
 }
 
+export function addFromPickPile() {}

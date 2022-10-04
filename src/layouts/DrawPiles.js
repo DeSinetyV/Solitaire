@@ -4,13 +4,10 @@ import styled from 'styled-components';
 import '../style/Pile.css'
 import { arrangingCards } from '../utils';
 
-function Draw({ drawCard }) {
-  const [pickPile, setPickPile] = useState([...drawCard]);
+function Draw({ drawCard, selectedCards,setSelectedCards,boardClick, setBoardClick,setArrangePileCards, arrangePileCards }) {
+  const [pickPile, setPickPile] = useState(drawCard);
   const [drawPile, setDrawPile] = useState([]);
   const [compteur, setCompteur] = useState(0);
-
-  console.log(compteur);
-  console.log(pickPile);
 
   if (compteur === pickPile.length) {
     setCompteur(0);
@@ -18,6 +15,7 @@ function Draw({ drawCard }) {
   const pickCart =
     compteur === pickPile.length ? pickPile[0] : pickPile[compteur];
   pickCart.displayed = true;
+
   return (
     <Container>
       <PileCard onClick={() => setCompteur((prev) => prev + 1)}>
@@ -28,7 +26,10 @@ function Draw({ drawCard }) {
         />
       </PileCard>
 
-      <Card cart={pickCart} />
+      <Card 
+      cart={pickCart}
+      setSelectedCards={setSelectedCards}
+             />
     </Container>
   );
 }
