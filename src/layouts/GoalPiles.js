@@ -1,29 +1,14 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import ArrangePile from '../components/ArrangePile';
 import CardPlaceholder from '../components/CardPlaceholder';
 import GoalPile from '../components/GoalPile';
-import { arrangingCards } from '../utils';
+// import { arrangingCards } from '../utils';
 
-function GoalPiles(selectedCards,setSelectedCards) {
-  const [cards, setCards] = useState ([[],[],[],[]]);
- console.log('1',{selectedCards})
-  useEffect(() => {
+function GoalPiles({selectedCards,setSelectedCards}) {
+  // const [cards, setCards] = useState ([]);
 
-    if (selectedCards.length === 2) {
-      if (
-        selectedCards[0].id === selectedCards[1].id + 1 &&
-        selectedCards[0].category === selectedCards[1].category
-      ) {
-        setCards(arrangingCards(cards, selectedCards));
-        setSelectedCards([]);
-      } else {
-        setSelectedCards([]);
-      }
-    }
-  }, [selectedCards, cards]);
-
+  const [categorys, setCategorys] = useState (['clubs','diamonds','hearts','spades']);
 
 
 
@@ -39,14 +24,14 @@ function GoalPiles(selectedCards,setSelectedCards) {
 
   return (
     <Container>
-      {cards?.map((pile, i) => {
+      {categorys?.map((category, i) => {
         return (
-          <ArrangePile
+          <GoalPile 
             key={i}
-            pile={pile}
+            category={category}
             pileIndex={i.toString()}
-            setSelectedCards={setSelectedCards}
             selectedCards={selectedCards}
+            setSelectedCards={setSelectedCards}
           />
         );
       })}
