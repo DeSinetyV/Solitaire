@@ -2,20 +2,20 @@ import React from 'react';
 import PickPile from '../components/PickPile';
 import styled from 'styled-components';
 
-
-function PickPiles({pickPileCards}) {
-
+function PickPiles({ pickPileCards }) {
   // console.log(pickPileCards);
-  return (<Pick>
-    <PickPile></PickPile>
-  </Pick>)
+  return (
+    <Pick>
+      <PickPile></PickPile>
+    </Pick>
+  );
 }
 
 const Pick = styled.div`
-  cursor : pointer;
+  cursor: pointer;
   width: 4rem;
   img {
-    width: 150px;
+    width: 100px;
     border-radius: 0.4rem;
   }
 `;

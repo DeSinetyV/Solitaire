@@ -4,9 +4,8 @@ import { CARDS } from '../data';
 import ArrangePiles from '../layouts/ArrangePiles';
 import GoalPiles from '../layouts/GoalPiles';
 import PickPiles from '../layouts/PickPiles';
-import '../style/Pile.css'
+import '../style/Pile.css';
 import Draw from '../layouts/DrawPiles';
-
 
 function Gameboard() {
   const [cards, setCards] = useState([...CARDS]);
@@ -22,7 +21,6 @@ function Gameboard() {
     <GameboardContainer onClick={() => setBoardClick(true)}>
       <Board>
         <TopContent>
-          <PickPiles pickPileCards={pickPileCards} />
           <Draw drawCard={pickPileCards}></Draw>
           <GoalPiles />
         </TopContent>
