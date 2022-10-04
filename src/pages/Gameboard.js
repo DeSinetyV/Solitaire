@@ -16,7 +16,7 @@ function Gameboard() {
   const [pickPileCards, setPickPileCards] = useState([...cards.slice(28)]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [boardClick, setBoardClick] = useState(false);
-  const [goalCards,setGoalCards] = useState([])
+  const [goalCards,setGoalCards] = useState([]);
 
 
   // const [cards, setCards] = useState(distributeCarts(arrangePileCards));
