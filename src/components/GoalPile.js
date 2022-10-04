@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import { React} from 'react';
-import { addSelectedToCards,arrangingGoalCards } from '../utils';
+import { addSelectedToCards, } from '../utils';
+// import  {arrangingGoalCards} from '../utils';
 import Card from './Card';
 import styled from 'styled-components';
 import CardPlaceholder from './CardPlaceholder';
@@ -31,7 +32,7 @@ if(selectedCards.length > 0 && addToGoalPile){
           setSelectedCards([]);
           setAddToGoalPile(false);
         } else {
-          arrangingGoalCards(carts, selectedCards, setCarts);
+          //arrangingGoalCards(carts, selectedCards, setCarts);
           setAddToGoalPile(false);
           setSelectedCards([]);
         }
