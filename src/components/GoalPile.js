@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react';
 import { React} from 'react';
-import { addSelectedToCards } from '../utils';
+import { addSelectedToCards,arrangingGoalCards } from '../utils';
 import Card from './Card';
 import styled from 'styled-components';
 import CardPlaceholder from './CardPlaceholder';
 
-function GoalPile({category, setSelectedCards, selectedCards, pileIndex}) {
+function GoalPile({category, setSelectedCards, selectedCards, pileIndex,carts, setCarts}) {
 
   const [cards, setCards] = useState([]);
   
@@ -31,6 +31,7 @@ if(selectedCards.length > 0 && addToGoalPile){
           setSelectedCards([]);
           setAddToGoalPile(false);
         } else {
+          arrangingGoalCards(carts, selectedCards, setCarts);
           setAddToGoalPile(false);
           setSelectedCards([]);
         }
@@ -40,7 +41,7 @@ if(selectedCards.length > 0 && addToGoalPile){
     if( cards.length >0 ){
       setLastPileCards([...cards].pop())
     }
-  }, [selectedCards, cards, category, lastPileCard,setSelectedCards,addToGoalPile]);
+  }, [selectedCards, cards, category, lastPileCard,setSelectedCards,addToGoalPile,carts,setCarts]);
   // console.log(cards);
   console.log(lastPileCard);
 
@@ -62,8 +63,8 @@ if (cards.length > 0 ){
   }
   return (
     <div 
-    onClick={() => { setAddToGoalPile(true)   }}>{category}
-      <CardPlaceholder />
+    onClick={() => { setAddToGoalPile(true)   }}>
+      <CardPlaceholder category ={category}/>
     </div>
   );
 }

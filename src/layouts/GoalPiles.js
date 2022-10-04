@@ -5,22 +5,11 @@ import CardPlaceholder from '../components/CardPlaceholder';
 import GoalPile from '../components/GoalPile';
 // import { arrangingCards } from '../utils';
 
-function GoalPiles({selectedCards,setSelectedCards}) {
+function GoalPiles({selectedCards,setSelectedCards,cards ,setCards}) {
   // const [cards, setCards] = useState ([]);
+  console.log(cards);
 
   const [categorys, setCategorys] = useState (['clubs','diamonds','hearts','spades']);
-
-
-
-  // return (
-  //   <Container>
-  //     <GoalPile />
-  //     <CardPlaceholder />
-  //     <CardPlaceholder />
-  //     <CardPlaceholder />
-  //     <CardPlaceholder />
-  //   </Container>
-  // );
 
   return (
     <Container>
@@ -32,27 +21,15 @@ function GoalPiles({selectedCards,setSelectedCards}) {
             pileIndex={i.toString()}
             selectedCards={selectedCards}
             setSelectedCards={setSelectedCards}
+            carts ={cards}
+            setCarts={setCards}
+
           />
         );
       })}
     </Container>
   );
 }
-// return (
-//   <Container>
-//     {cards?.map((pile, i) => {
-//       return (
-//         <GoalPile
-//           key={i}
-//           pile={pile}
-//           pileIndex={i.toString()}
-//           setSelectedCards={setSelectedCards}
-//           selectedCards={selectedCards}
-//         />
-//       );
-//     })}
-//   </Container>
-
 
 const Container = styled.div`
   display: grid;

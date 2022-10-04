@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ArrangePile from '../components/ArrangePile';
-import { arrangingCards, distributeCarts } from '../utils';
+import { arrangingCards } from '../utils';
 
-function ArrangePiles({ arrangePileCards, boardClick, setBoardClick,selectedCards,setSelectedCards}) {
-  const [cards, setCards] = useState(distributeCarts(arrangePileCards));
+function ArrangePiles({cards, setCards, boardClick, setBoardClick,selectedCards,setSelectedCards}) {
+  // const [cards, setCards] = useState(distributeCarts(arrangePileCards));
   // const [selectedCards, setSelectedCards] = useState([]);
   useEffect(() => {
-    console.log(selectedCards);
+    console.log(selectedCards.length);
+    console.log(cards);
 
     //    console.log('random select :', selectedCards);
     if (selectedCards.length === 2) {
@@ -20,7 +21,7 @@ function ArrangePiles({ arrangePileCards, boardClick, setBoardClick,selectedCard
       }
       setBoardClick(false);
     }
-  }, [selectedCards, cards, boardClick, setBoardClick]);
+  }, [selectedCards, cards, boardClick, setBoardClick, setSelectedCards, setCards]);
 
   return (
     <Container>

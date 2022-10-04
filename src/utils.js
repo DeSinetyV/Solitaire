@@ -44,6 +44,42 @@ export function arrangingCards(cards, selectedCards, setCards) {
     setCards(res);
   }
 }
+export function arrangingGoalCards(cards, selectedCards, setCards) {
+  let arr = [];
+  // if (
+  //   (selectedCards[0].id === selectedCards[1].id + 1 &&
+  //     selectedCards[0].category === selectedCards[1].category) ||
+  //   typeof selectedCards[1] === 'string'
+  // ) {
+    console.log(cards)
+
+    cards.map((pile) => {
+      if (pile.includes(selectedCards[0])) {
+        arr = pile.slice(pile.indexOf(selectedCards[0]));
+        console.log(arr)
+      }
+      return pile;
+    }
+    );
+    const res = cards.map((pile, i) => {
+      if (pile.pop()) {
+        pile.splice(pile.indexOf(selectedCards[0]));
+      }
+      // if (
+      //   pile.includes(selectedCards[1]) ||
+      //   selectedCards[1] === i.toString()
+      // ) {
+      //   pile = [...pile, ...arr];
+      // }
+      // display the last card of each pile by adding displayed property
+      // if (pile.length > 0 && !pile[pile.length - 1].displayed) {
+      //   pile[pile.length - 1].displayed = true;
+      // }
+      return pile;
+    });
+    setCards(res);
+  }
+// }
 
 // add selected property to the displayed cards for highlighting them
 export function addSelectedToCards(pile, selectedCards) {
