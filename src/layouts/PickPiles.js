@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 function PickPiles({pickPileCards}) {
 
-  // console.log(pickPileCards);
   return (<Pick>
     <PickPile></PickPile>
   </Pick>)

@@ -15,19 +15,25 @@ function Gameboard() {
   ]);
   const [pickPileCards, setPickPileCards] = useState([...cards.slice(28)]);
   const [boardClick, setBoardClick] = useState(false);
-  // console.log(arrangePileCards)
-  // console.log(pickPileCards)
-  // console.log(CARDS)
+  const [selectedCards, setSelectedCards] = useState([]);
   return (
     <GameboardContainer onClick={() => setBoardClick(true)}>
       <Board>
         <TopContent>
           <PickPiles pickPileCards={pickPileCards} />
-          <Draw drawCard={pickPileCards}></Draw>
+          <Draw 
+          selectedCards={selectedCards}
+          setSelectedCards={setSelectedCards}
+          drawCard={pickPileCards}
+          boardClick={boardClick}
+          setBoardClick={setBoardClick}
+          ></Draw>
           <GoalPiles />
         </TopContent>
         <BottomContent>
           <ArrangePiles
+            selectedCards={selectedCards}
+            setSelectedCards={setSelectedCards}
             arrangePileCards={arrangePileCards}
             boardClick={boardClick}
             setBoardClick={setBoardClick}
@@ -48,8 +54,8 @@ const GameboardContainer = styled.div`
 `;
 
 const Board = styled.div`
-  width: 90%;
-  height: 90%;
+  width: 100vw;
+  height: 100vh;
   background-color: green;
   padding: 1rem;
 `;

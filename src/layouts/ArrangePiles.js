@@ -3,11 +3,9 @@ import styled from 'styled-components';
 import ArrangePile from '../components/ArrangePile';
 import { arrangingCards, distributeCarts } from '../utils';
 
-function ArrangePiles({ arrangePileCards, boardClick, setBoardClick }) {
+function ArrangePiles({selectedCards,setSelectedCards, arrangePileCards, boardClick, setBoardClick }) {
   const [cards, setCards] = useState(distributeCarts(arrangePileCards));
-  const [selectedCards, setSelectedCards] = useState([]);
   useEffect(() => {
-    //    console.log('random select :', selectedCards);
     if (selectedCards.length === 2) {
       arrangingCards(cards, selectedCards, setCards);
       setSelectedCards([]);

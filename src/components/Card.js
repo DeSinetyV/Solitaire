@@ -2,11 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 
+
 function Card({ cart, setSelectedCards, cartIndex }) {
 
-  if(cart.test) {
-    console.log(cart)
-  }
   return (
     <Frame
       displayed={cart.displayed}
