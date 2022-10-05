@@ -24,6 +24,8 @@ if(selectedCards.length > 0 && addToGoalPile){
      console.log(lastPileCard);
      console.log( selectedCards[0].id);
      console.log(selectedCards[0].category);
+      console.log(selectedCards)
+
 
 
 
@@ -32,12 +34,12 @@ if(selectedCards.length > 0 && addToGoalPile){
           selectedCards[0].category === category
         ) {
         arrangingGoalCards(carts, selectedCards, setCarts);
-        setCards(prev => [...prev, selectedCards[0]])
+          setCards(prev => [...prev, selectedCards[0]])
           setSelectedCards([]);
           setAddToGoalPile(false);
-        } else {
+        } else if (selectedCards.length > 1) {
           setAddToGoalPile(false);
-          setSelectedCards([]);
+          // setSelectedCards([]);
         }
       
     }

@@ -12,6 +12,9 @@ function ArrangePiles({arrangePileCards, boardClick, setBoardClick,selectedCards
 
     //    console.log('random select :', selectedCards);
     if (selectedCards.length === 2) {
+      // console.log(selectedCards);
+      
+
       arrangingCards(cards, selectedCards, setCards);
       setSelectedCards([]);
     }

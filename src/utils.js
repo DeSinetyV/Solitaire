@@ -12,19 +12,34 @@ export function distributeCarts(arr) {
   return resultArr;
 }
 // arranging cards from a pile to another pile by (adding and removing cards)
-export function arrangingCards(cards, selectedCards, setCards) {
+export function arrangingCards(cards, selectedCards,setSelectedCards, setCards) {
   let arr = [];
   if (
     (selectedCards[0].id + 1 === selectedCards[1].id &&
       selectedCards[0].color !== selectedCards[1].color) ||
     typeof selectedCards[1] === 'string'
   ) {
+
+
     cards.map((pile) => {
-      if (pile.includes(selectedCards[0])) {
+      if (!cards.includes(selectedCards[0]) && pile.includes(selectedCards[1])) {
+    console.log('test2');
+    console.log(pile);
+        pile = [...pile,selectedCards[0]]
+        console.log(pile);
+        setSelectedCards=([]);
+        return pile;
+        // arr = pile.slice(pile.indexOf(selectedCards[0]));
+      }
+      else if (pile.includes(selectedCards[0])) {
         arr = pile.slice(pile.indexOf(selectedCards[0]));
+
+        
       }
       return pile;
     });
+
+if (selectedCards.length > 0){
     const res = cards.map((pile, i) => {
       if (pile.includes(selectedCards[0])) {
         pile.splice(pile.indexOf(selectedCards[0]));
@@ -35,13 +50,22 @@ export function arrangingCards(cards, selectedCards, setCards) {
       ) {
         pile = [...pile, ...arr];
       }
+
+
       // display the last card of each pile by adding displayed property
       if (pile.length > 0 && !pile[pile.length - 1].displayed) {
         pile[pile.length - 1].displayed = true;
       }
+      console.log('TEST');
+
+      console.log(pile);
       return pile;
+      
     });
     setCards(res);
+  }
+
+
   }
 }
 
