@@ -9,17 +9,17 @@ import '../style/Pile.css';
 import Draw from '../layouts/DrawPiles';
 
 function Gameboard() {
-  const [cards, setCards] = useState([...CARDS]);
+  const [desk, setDesk] = useState([...CARDS]);
   const [arrangePileCards, setArrangePileCards] = useState([
-    ...cards.slice(0, 28),
+    ...desk.slice(0, 28),
   ]);
-  const [pickPileCards, setPickPileCards] = useState([...cards.slice(28)]);
+  const [pickPileCards, setPickPileCards] = useState([...desk.slice(28)]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [boardClick, setBoardClick] = useState(false);
   const [goalCards,setGoalCards] = useState([]);
+  
+  const [cards, setCards] = useState(distributeCarts(arrangePileCards));
 
-
-  // const [cards, setCards] = useState(distributeCarts(arrangePileCards));
 
   // console.log(arrangePileCards.length);
 
