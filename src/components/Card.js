@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDrag } from 'react-dnd';
 
-function Card({ cart, setSelectedCards, cartIndex }) {
+function Card({ cart, setSelectedCards, cartIndex,setAddToGoalPile }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD',
     item: { cart: cart },
@@ -26,6 +26,7 @@ function Card({ cart, setSelectedCards, cartIndex }) {
       }}
     >
       <img
+      onClick={() => { setAddToGoalPile(true)   }}
         src={
           cart.displayed
             ? `images/CardsFaces/${cart.category}/${cart.image}`
