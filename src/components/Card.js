@@ -26,7 +26,7 @@ function Card({ cart, setSelectedCards, cartIndex,setAddToGoalPile }) {
       }}
     >
       <img
-      onClick={() => { setAddToGoalPile(true)   }}
+      onClick={() => { if (setAddToGoalPile){setAddToGoalPile(true)}   }}
         src={
           cart.displayed
             ? `images/CardsFaces/${cart.category}/${cart.image}`

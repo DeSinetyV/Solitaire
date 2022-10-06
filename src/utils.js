@@ -12,7 +12,7 @@ export function distributeCarts(arr) {
   return resultArr;
 }
 // arranging cards from a pile to another pile by (adding and removing cards)
-export function arrangingCards(cards, selectedCards,setSelectedCards, setCards) {
+export function arrangingCards(cards, selectedCards, setCards) {
   let arr = [];
   if (
     (selectedCards[0].id + 1 === selectedCards[1].id &&
@@ -20,69 +20,81 @@ export function arrangingCards(cards, selectedCards,setSelectedCards, setCards) 
     typeof selectedCards[1] === 'string'
   ) {
 
-
     cards.map((pile) => {
       if (!cards.includes(selectedCards[0]) && pile.includes(selectedCards[1])) {
-    console.log('test2');
-    console.log(pile);
-        pile = [...pile,selectedCards[0]]
-        console.log(pile);
-        setSelectedCards=([]);
-        return pile;
-        // arr = pile.slice(pile.indexOf(selectedCards[0]));
+                        console.log('COUCOU');
+                        console.log(selectedCards[0]);
+                        console.log(pile);
+                        pile = [...pile,selectedCards[0]]
+                        console.log(pile);
+
+
+                        const res = cards.map((pile, i) => {
+                          if (pile.includes(selectedCards[1])) {
+                            pile = [...pile,selectedCards[0]]
+                            //  var test = selectedCards[0]
+                            // console.log(test)
+
+                            //  test.id -=  1
+
+                            arrangingGoalCards(cards, selectedCards)
+                          }
+                        
+                    
+                          // display the last card of each pile by adding displayed property
+                          if (pile.length > 0 && !pile[pile.length - 1].displayed) {
+                            pile[pile.length - 1].displayed = true;
+                          }
+                          return pile;
+                        });
+                        setCards(res);
+
+
+
+
       }
       else if (pile.includes(selectedCards[0])) {
-        arr = pile.slice(pile.indexOf(selectedCards[0]));
+                      arr = pile.slice(pile.indexOf(selectedCards[0]));
 
-        
+
+
+
+                      const res = cards.map((pile, i) => {
+
+                        if (pile.includes(selectedCards[0])) {
+                          pile.splice(pile.indexOf(selectedCards[0]));
+                        }
+                        if (
+                          pile.includes(selectedCards[1]) ||
+                          selectedCards[1] === i.toString()
+                        ) {
+                          pile = [...pile, ...arr];
+                        }
+                      
+                  
+                        // display the last card of each pile by adding displayed property
+                        if (pile.length > 0 && !pile[pile.length - 1].displayed) {
+                          pile[pile.length - 1].displayed = true;
+                        }
+                        return pile;
+                      });
+                      setCards(res);
+
+
       }
       return pile;
     });
-
-if (selectedCards.length > 0){
-    const res = cards.map((pile, i) => {
-      if (pile.includes(selectedCards[0])) {
-        pile.splice(pile.indexOf(selectedCards[0]));
-      }
-      if (
-        pile.includes(selectedCards[1]) ||
-        selectedCards[1] === i.toString()
-      ) {
-        pile = [...pile, ...arr];
-      }
-
-
-      // display the last card of each pile by adding displayed property
-      if (pile.length > 0 && !pile[pile.length - 1].displayed) {
-        pile[pile.length - 1].displayed = true;
-      }
-      console.log('TEST');
-
-      console.log(pile);
-      return pile;
-      
-    });
-    setCards(res);
-  }
-
-
   }
 }
 
 
-export function arrangingGoalCards(cards, selectedCards, setCards) {
+export function arrangingGoalCards(cards, selectedCards) {
   console.log(cards)
   console.log(selectedCards)
-  console.log(selectedCards[0])
-
-
+  // console.log(selectedCards[0].id)
 
   let arr = [];
-  // if (
-  //   (selectedCards[0].id === selectedCards[1].id + 1 &&
-  //     selectedCards[0].category === selectedCards[1].category) ||
-  //   typeof selectedCards[1] === 'string'
-  // ) {
+
     console.log(cards)
 
     cards.map((pile) => {
@@ -95,26 +107,8 @@ export function arrangingGoalCards(cards, selectedCards, setCards) {
       return pile;
     });
 
-
-    // const res = cards.map((pile, i) => {
-    //   if (pile.pop()) {
-    //     pile.splice(pile.indexOf(selectedCards[0]));
-    //   }
-    //   // if (
-    //   //   pile.includes(selectedCards[1]) ||
-    //   //   selectedCards[1] === i.toString()
-    //   // ) {
-    //   //   pile = [...pile, ...arr];
-    //   // }
-    //   // display the last card of each pile by adding displayed property
-    //   // if (pile.length > 0 && !pile[pile.length - 1].displayed) {
-    //   //   pile[pile.length - 1].displayed = true;
-    //   // }
-    //   return pile;
-    // });
-    // setCards(res);
   }
-// }
+
 
 // add selected property to the displayed cards for highlighting them
 export function addSelectedToCards(pile, selectedCards) {

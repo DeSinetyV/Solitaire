@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import { React} from 'react';
 import { addSelectedToCards, arrangingGoalCards } from '../utils';
-// import  {arrangingGoalCards} from '../utils';
 import Card from './Card';
 import styled from 'styled-components';
 import CardPlaceholder from './CardPlaceholder';
@@ -22,8 +21,6 @@ function GoalPile({category, setSelectedCards, selectedCards, pileIndex,carts, s
     console.log(addToGoalPile);
 if(selectedCards.length > 0 && addToGoalPile){
      console.log(lastPileCard);
-     console.log( selectedCards[0].id);
-     console.log(selectedCards[0].category);
       console.log(selectedCards)
 
 
@@ -37,6 +34,15 @@ if(selectedCards.length > 0 && addToGoalPile){
           setCards(prev => [...prev, selectedCards[0]])
           setSelectedCards([]);
           setAddToGoalPile(false);
+        // } else if (selectedCards[0]=== lastPileCard) {
+   
+   
+                                                                              
+        //                                                                               // console.log('ENCORECOUCOU')
+        //                                                                               // console.log(lastPileCard)
+        //                                                                               // lastPileCard.id -=1
+        //                                                                               // console.log(lastPileCard)
+
         } else if (selectedCards.length > 1) {
           setAddToGoalPile(false);
           // setSelectedCards([]);

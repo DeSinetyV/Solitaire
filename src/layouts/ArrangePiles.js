@@ -8,7 +8,7 @@ function ArrangePiles({arrangePileCards, boardClick, setBoardClick,selectedCards
   // const [selectedCards, setSelectedCards] = useState([]);
   useEffect(() => {
     console.log(selectedCards.length);
-    console.log(cards);
+
 
     //    console.log('random select :', selectedCards);
     if (selectedCards.length === 2) {
