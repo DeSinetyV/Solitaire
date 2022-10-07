@@ -21,8 +21,6 @@ function ArrangePiles({
   cards,
   setCards,
 }) {
-  const [cards, setCards] = useState(distributeCarts(arrangePileCards));
-  const [selectedCards, setSelectedCards] = useState([]);
   useEffect(() => {
     if (selectedCards.length === 2) {
       arrangingCards(cards, selectedCards, setCards);

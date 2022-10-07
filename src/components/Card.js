@@ -16,7 +16,7 @@ function Card({ cart, setSelectedCards, cartIndex, setAddToGoalPile }) {
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: 'CARD',
-      item: { cart: cart },
+      item: cart,
       beginDrag: (item) => item,
       canDrag: cart.displayed === true,
       collect: (monitor) => ({
