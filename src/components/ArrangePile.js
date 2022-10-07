@@ -48,7 +48,7 @@ function ArrangePile({
     }),
     [dragCards, pile, cards, pileIndex],
   );
-  console.log(dragCards.current, 'dragging', draggingCard);
+  //  console.log(dragCards.current, 'dragging', draggingCard);
 
   useEffect(() => {
     if (draggingCard) {

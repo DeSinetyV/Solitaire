@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CARDS } from '../data';
 import ArrangePiles from '../layouts/ArrangePiles';
-import {distributeCarts } from '../utils';
+import { distributeCarts } from '../utils';
 import GoalPiles from '../layouts/GoalPiles';
 import PickPiles from '../layouts/PickPiles';
 import '../style/Pile.css';
@@ -16,23 +16,30 @@ function Gameboard() {
   const [pickPileCards, setPickPileCards] = useState([...desk.slice(28)]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [boardClick, setBoardClick] = useState(false);
-  const [goalCards,setGoalCards] = useState([]);
-  
+  const [goalCards, setGoalCards] = useState([]);
   const [cards, setCards] = useState(distributeCarts(arrangePileCards));
-
-
-  // console.log(arrangePileCards.length);
 
   return (
     <GameboardContainer>
       <Board>
         <TopContent>
-        <Draw drawCard={pickPileCards}></Draw>
-         <GoalPiles cards={cards} setCards={setCards} goalCards={goalCards} arrangePileCards={arrangePileCards} selectedCards={selectedCards} setSelectedCards={setSelectedCards} />
-
+          <Draw drawCard={pickPileCards}></Draw>
+          <GoalPiles
+            cards={cards}
+            setCards={setCards}
+            goalCards={goalCards}
+            selectedCards={selectedCards}
+            setSelectedCards={setSelectedCards}
+          />
         </TopContent>
         <BottomContent>
-          <ArrangePiles cards ={cards} setCards ={setCards} arrangePileCards={arrangePileCards} selectedCards={selectedCards} setSelectedCards={setSelectedCards} />
+          <ArrangePiles
+            cards={cards}
+            setCards={setCards}
+            arrangePileCards={arrangePileCards}
+            selectedCards={selectedCards}
+            setSelectedCards={setSelectedCards}
+          />
         </BottomContent>
       </Board>
     </GameboardContainer>

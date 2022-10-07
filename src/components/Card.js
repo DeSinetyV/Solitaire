@@ -2,16 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDrag } from 'react-dnd';
 
-// function Card({ cart, setSelectedCards, cartIndex }) {
-//   const [{ isDragging }, drag] = useDrag(
-//     () => ({
-//       type: 'CARD',
-//       item: cart,
-//       beginDrag: (item) => item,
-//       canDrag: cart.displayed === true,
-//       collect: (monitor) => ({
-//         isDragging: !!monitor.isDragging(),
-//       }),
 function Card({ cart, setSelectedCards, cartIndex, setAddToGoalPile }) {
   const [{ isDragging }, drag] = useDrag(
     () => ({

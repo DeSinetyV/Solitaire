@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ArrangePile from '../components/ArrangePile';
-import { arrangingCards, distributeCarts } from '../utils';
+import { arrangingCards } from '../utils';
 
-// function ArrangePiles({
-//   arrangePileCards,
-//   boardClick,
-//   setBoardClick,
-//   selectedCards,
-//   setSelectedCards,
-// }) {
-//   const [cards, setCards] = useState(distributeCarts(arrangePileCards));
-//   console.log('render');
 function ArrangePiles({
-  arrangePileCards,
   boardClick,
   setBoardClick,
   selectedCards,
