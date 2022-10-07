@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import ArrangePile from '../components/ArrangePile';
 import { arrangingCards } from '../utils';
 
-
 function ArrangePiles({
   boardClick,
   setBoardClick,
@@ -14,6 +13,9 @@ function ArrangePiles({
 }) {
   useEffect(() => {
     if (selectedCards.length === 2) {
+      // console.log(selectedCards);
+      
+
       arrangingCards(cards, selectedCards, setCards);
       if (
         (selectedCards[0].id + 1 === selectedCards[1].id &&
