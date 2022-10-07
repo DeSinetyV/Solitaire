@@ -10,22 +10,24 @@ function ArrangePiles({
   setSelectedCards,
   cards,
   setCards,
+  pickPile,
+  setPickPile
 }) {
   useEffect(() => {
     if (selectedCards.length === 2) {
-      // console.log(selectedCards);
+      console.log(selectedCards);
       
 
       arrangingCards(cards, selectedCards, setCards);
       if (
-        (selectedCards[0].id + 1 === selectedCards[1].id &&
+        (selectedCards[0].number + 1 === selectedCards[1].number &&
           selectedCards[0].color !== selectedCards[1].color && 
           pickPile.includes(selectedCards[0])) ||
           typeof selectedCards[1] === 'string'
       ) {
 
       setPickPile(prev => {console.log(prev) ;return prev.filter(card => {
-        return card.id !== selectedCards[0].id || card.category !== selectedCards[0].category})
+        return card.number !== selectedCards[0].number || card.category !== selectedCards[0].category})
       }
       )
 
@@ -50,6 +52,8 @@ function ArrangePiles({
     setBoardClick,
     setSelectedCards,
     setCards,
+    pickPile,
+    setPickPile
   ]);
 
   return (
@@ -64,6 +68,8 @@ function ArrangePiles({
             pileIndex={i.toString()}
             setSelectedCards={setSelectedCards}
             selectedCards={selectedCards}
+            pickPile={pickPile}
+            setPickPile={setPickPile}
           />
         );
       })}

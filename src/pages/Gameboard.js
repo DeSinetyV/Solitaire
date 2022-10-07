@@ -23,7 +23,7 @@ function Gameboard() {
     <GameboardContainer>
       <Board>
         <TopContent>
-          <Draw drawCard={pickPileCards}></Draw>
+          <Draw pickPile={pickPileCards} setSelectedCards={setSelectedCards}></Draw>
           <GoalPiles
             cards={cards}
             setCards={setCards}
@@ -39,6 +39,8 @@ function Gameboard() {
             arrangePileCards={arrangePileCards}
             selectedCards={selectedCards}
             setSelectedCards={setSelectedCards}
+            pickPile={pickPileCards}
+            setPickPile = {setPickPileCards}
           />
         </BottomContent>
       </Board>

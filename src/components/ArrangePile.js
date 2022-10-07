@@ -16,9 +16,12 @@ function ArrangePile({
   pileIndex,
   setCards,
   cards,
+  pickPile,
+  setPickPile
 }) {
   const [indexPile, setIndexPile] = useState(null);
   const dragCards = useRef(null);
+  const [dragCard, setDragCard] = useState(null);
 
   const [{ isOver, draggingCard }, dropTarget] = useDrop(
     () => ({
@@ -28,6 +31,7 @@ function ArrangePile({
         if (dragCards.current) {
           pile.splice(pile.length, 0, ...dragCards.current);
         } else {
+          setDragCard(item);
           pile.push(item);
         }
       },
@@ -46,9 +50,8 @@ function ArrangePile({
         draggingCard: monitor.getItem(),
       }),
     }),
-    [dragCards, pile, cards, pileIndex],
+    [dragCards, pile, cards, pileIndex,dragCard,pickPile],
   );
-  console.log(dragCards.current, 'dragging', draggingCard);
 
   useEffect(() => {
     if (draggingCard) {
@@ -58,7 +61,10 @@ function ArrangePile({
       removeExtractedCards(cards, setCards, dragCards, indexPile);
       setIndexPile(null);
     }
-  }, [draggingCard, cards, indexPile, setCards, setIndexPile, dragCards]);
+    if(dragCard){
+      setPickPile(prev => prev.filter(cart=> cart.id !== dragCard.id))
+    }
+  }, [draggingCard, cards, indexPile, setCards, setIndexPile, dragCards,dragCard,setPickPile]);
 
   if (pile.includes(selectedCards[0])) {
     addSelectedToCards(pile, selectedCards);

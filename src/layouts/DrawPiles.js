@@ -14,7 +14,6 @@ function Draw({ pickPile,setSelectedCards}) {
   if(pickCart) {
     pickCart.displayed = true; // Affiche la carte 
   }
-  console.log(pickCart)
   return (
     <Container>
       <PileCard onClick={() => setCompteur((prev) => prev + 1)}> 

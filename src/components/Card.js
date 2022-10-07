@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDrag } from 'react-dnd';
 
 function Card({ cart, setSelectedCards, cartIndex, setAddToGoalPile }) {
-  const [{ isDragging }, drag] = useDrag(
+  const [{ isDragging, item }, drag] = useDrag(
     () => ({
       type: 'CARD',
       item: cart,
@@ -11,11 +11,11 @@ function Card({ cart, setSelectedCards, cartIndex, setAddToGoalPile }) {
       canDrag: cart.displayed === true,
       collect: (monitor) => ({
         isDragging: !!monitor.isDragging(),
+        item: monitor.getItem()
       }),
     }),
-    [cart.displayed],
+    [cart.displayed,cart],
   );
-
   return (
     <Frame
       isDragging={isDragging}
