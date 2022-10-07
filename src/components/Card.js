@@ -2,19 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDrag } from 'react-dnd';
 
-function Card({ cart, setSelectedCards, cartIndex,setAddToGoalPile }) {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: 'CARD',
-    item: { cart: cart },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+// function Card({ cart, setSelectedCards, cartIndex }) {
+//   const [{ isDragging }, drag] = useDrag(
+//     () => ({
+//       type: 'CARD',
+//       item: cart,
+//       beginDrag: (item) => item,
+//       canDrag: cart.displayed === true,
+//       collect: (monitor) => ({
+//         isDragging: !!monitor.isDragging(),
+//       }),
+function Card({ cart, setSelectedCards, cartIndex, setAddToGoalPile }) {
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: 'CARD',
+      item: cart,
+      beginDrag: (item) => item,
+      canDrag: cart.displayed === true,
+      collect: (monitor) => ({
+        isDragging: !!monitor.isDragging(),
+      }),
     }),
-  }));
+    [cart.displayed],
+  );
 
   return (
     <Frame
       isDragging={isDragging}
-      ref={drag}
       displayed={cart.displayed}
       selected={cart.selected}
       cartIndex={cartIndex}
@@ -26,7 +40,10 @@ function Card({ cart, setSelectedCards, cartIndex,setAddToGoalPile }) {
       }}
     >
       <img
-      onClick={() => { if (setAddToGoalPile){setAddToGoalPile(true)}   }}
+        ref={drag}
+        onClick={() => {
+          setAddToGoalPile(true);
+        }}
         src={
           cart.displayed
             ? `images/CardsFaces/${cart.category}/${cart.image}`

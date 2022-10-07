@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import CardPlaceholder from '../components/CardPlaceholder';
 import GoalPile from '../components/GoalPile';
@@ -18,15 +18,14 @@ function GoalPiles({selectedCards,setSelectedCards,cards ,setCards}) {
     <Container>
       {categorys?.map((category, i) => {
         return (
-          <GoalPile 
+          <GoalPile
             key={i}
             category={category}
             pileIndex={i.toString()}
             selectedCards={selectedCards}
             setSelectedCards={setSelectedCards}
-            carts ={cards}
+            carts={cards}
             setCarts={setCards}
-
           />
         );
       })}
@@ -38,7 +37,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
-  width:67%;
+  width: 67%;
 `;
 
 export default GoalPiles;

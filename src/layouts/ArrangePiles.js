@@ -1,16 +1,27 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ArrangePile from '../components/ArrangePile';
 import { arrangingCards, distributeCarts } from '../utils';
 
-function ArrangePiles({arrangePileCards, boardClick, setBoardClick,selectedCards,setSelectedCards,cards, setCards}) {
-  // const [cards, setCards] = useState(distributeCarts(arrangePileCards));
-  // const [selectedCards, setSelectedCards] = useState([]);
+// function ArrangePiles({
+//   arrangePileCards,
+//   boardClick,
+//   setBoardClick,
+//   selectedCards,
+//   setSelectedCards,
+// }) {
+//   const [cards, setCards] = useState(distributeCarts(arrangePileCards));
+//   console.log('render');
+function ArrangePiles({
+  arrangePileCards,
+  boardClick,
+  setBoardClick,
+  selectedCards,
+  setSelectedCards,
+  cards,
+  setCards,
+}) {
   useEffect(() => {
-    console.log(selectedCards.length);
-
-
-    //    console.log('random select :', selectedCards);
     if (selectedCards.length === 2) {
       // console.log(selectedCards);
       
@@ -24,13 +35,22 @@ function ArrangePiles({arrangePileCards, boardClick, setBoardClick,selectedCards
       }
       setBoardClick(false);
     }
-  }, [selectedCards, cards, boardClick, setBoardClick, setSelectedCards, setCards]);
+  }, [
+    selectedCards,
+    cards,
+    boardClick,
+    setBoardClick,
+    setSelectedCards,
+    setCards,
+  ]);
 
   return (
     <Container>
       {cards?.map((pile, i) => {
         return (
           <ArrangePile
+            setCards={setCards}
+            cards={cards}
             key={i}
             pile={pile}
             pileIndex={i.toString()}
