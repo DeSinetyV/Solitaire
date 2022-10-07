@@ -19,7 +19,7 @@ export function distributeCarts(arr) {
 export function arrangingCards(cards, selectedCards, setCards) {
   let arr = [];
   if (
-    (selectedCards[0].id + 1 === selectedCards[1].id &&
+    (selectedCards[0].number + 1 === selectedCards[1].number &&
       selectedCards[0].color !== selectedCards[1].color) ||
     typeof selectedCards[1] === 'string'
   ) {
@@ -49,6 +49,58 @@ export function arrangingCards(cards, selectedCards, setCards) {
   }
 }
 
+// export function arrangingGoalCards(cards, selectedCards, setCards) {
+//   let arr = [];
+//   // if (
+//   //   (selectedCards[0].id === selectedCards[1].id + 1 &&
+//   //     selectedCards[0].category === selectedCards[1].category) ||
+//   //   typeof selectedCards[1] === 'string'
+//   // ) {
+//     console.log(cards)
+
+export function arrangingGoalCards(cards, selectedCards, setCards) {
+  console.log(cards);
+  console.log(selectedCards);
+  console.log(selectedCards[0]);
+
+  let arr = [];
+  // if (
+  //   (selectedCards[0].id === selectedCards[1].id + 1 &&
+  //     selectedCards[0].category === selectedCards[1].category) ||
+  //   typeof selectedCards[1] === 'string'
+  // ) {
+  console.log(cards);
+
+  cards.map((pile) => {
+    if (pile.includes(selectedCards[0])) {
+      console.log(pile);
+      arr = pile.pop();
+      console.log(arr);
+      if (pile.length > 0) pile[pile.length - 1].displayed = true;
+    }
+    return pile;
+  });
+
+  // const res = cards.map((pile, i) => {
+  //   if (pile.pop()) {
+  //     pile.splice(pile.indexOf(selectedCards[0]));
+  //   }
+  //   // if (
+  //   //   pile.includes(selectedCards[1]) ||
+  //   //   selectedCards[1] === i.toString()
+  //   // ) {
+  //   //   pile = [...pile, ...arr];
+  //   // }
+  //   // display the last card of each pile by adding displayed property
+  //   // if (pile.length > 0 && !pile[pile.length - 1].displayed) {
+  //   //   pile[pile.length - 1].displayed = true;
+  //   // }
+  //   return pile;
+  // });
+  // setCards(res);
+}
+// }
+
 // add selected property to the displayed cards for highlighting them
 export function addSelectedToCards(pile, selectedCards) {
   pile.map((card, i) => {
@@ -59,4 +111,37 @@ export function addSelectedToCards(pile, selectedCards) {
   });
 }
 
-export function addFromPickPile() {}
+/////////////
+
+/////////////////
+
+//Drag && Drop
+// extract a card and its below cards as an array to add it to the drop Pile
+export function dragCardsList(draggingCard, cards) {
+  let sliced = null;
+  if (draggingCard) {
+    cards.map((p) => {
+      if (p.some((card) => draggingCard.id === card.id)) {
+        sliced = p.slice(p.indexOf(draggingCard));
+      }
+      return p;
+    });
+  }
+  return sliced;
+}
+export function removeExtractedCards(cards, setCards, dragCards, indexPile) {
+  let newCards = cards.map((pile, i) => {
+    if (
+      indexPile !== i.toString() &&
+      pile.some((card) => card.id === dragCards.current[0].id)
+    ) {
+      pile.splice(pile.indexOf(dragCards.current[0]));
+      if (pile.length > 0) {
+        pile[pile.length - 1].displayed = true;
+      }
+      return pile;
+    }
+    return pile;
+  });
+  setCards(newCards);
+}

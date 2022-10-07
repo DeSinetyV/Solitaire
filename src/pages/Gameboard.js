@@ -2,40 +2,37 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CARDS } from '../data';
 import ArrangePiles from '../layouts/ArrangePiles';
+import {distributeCarts } from '../utils';
 import GoalPiles from '../layouts/GoalPiles';
 import PickPiles from '../layouts/PickPiles';
 import '../style/Pile.css';
 import Draw from '../layouts/DrawPiles';
 
 function Gameboard() {
-  const [cards, setCards] = useState([...CARDS]);
+  const [desk, setDesk] = useState([...CARDS]);
   const [arrangePileCards, setArrangePileCards] = useState([
-    ...cards.slice(0, 28),
+    ...desk.slice(0, 28),
   ]);
-  const [pickPileCards, setPickPileCards] = useState([...cards.slice(28)]);
-  const [boardClick, setBoardClick] = useState(false);
+  const [pickPileCards, setPickPileCards] = useState([...desk.slice(28)]);
   const [selectedCards, setSelectedCards] = useState([]);
+  const [boardClick, setBoardClick] = useState(false);
+  const [goalCards,setGoalCards] = useState([]);
+  
+  const [cards, setCards] = useState(distributeCarts(arrangePileCards));
+
+
+  // console.log(arrangePileCards.length);
+
   return (
-    <GameboardContainer onClick={() => setBoardClick(true)}>
+    <GameboardContainer>
       <Board>
         <TopContent>
-          <PickPiles pickPileCards={pickPileCards} />
-          <Draw 
-          setSelectedCards={setSelectedCards}
-          pickPile={pickPileCards}
-          ></Draw>
-          <GoalPiles />
+        <Draw drawCard={pickPileCards}></Draw>
+         <GoalPiles cards={cards} setCards={setCards} goalCards={goalCards} arrangePileCards={arrangePileCards} selectedCards={selectedCards} setSelectedCards={setSelectedCards} />
+
         </TopContent>
         <BottomContent>
-          <ArrangePiles
-            selectedCards={selectedCards}
-            setSelectedCards={setSelectedCards}
-            arrangePileCards={arrangePileCards}
-            boardClick={boardClick}
-            setBoardClick={setBoardClick}
-            setPickPile={setPickPileCards}
-            pickPile={pickPileCards}
-          />
+          <ArrangePiles cards ={cards} setCards ={setCards} arrangePileCards={arrangePileCards} selectedCards={selectedCards} setSelectedCards={setSelectedCards} />
         </BottomContent>
       </Board>
     </GameboardContainer>
