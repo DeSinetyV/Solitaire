@@ -1,16 +1,18 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ArrangePile from '../components/ArrangePile';
 import { arrangingCards, distributeCarts } from '../utils';
 
-function ArrangePiles({arrangePileCards, boardClick, setBoardClick,selectedCards,setSelectedCards}) {
+function ArrangePiles({
+  arrangePileCards,
+  boardClick,
+  setBoardClick,
+  selectedCards,
+  setSelectedCards,
+}) {
   const [cards, setCards] = useState(distributeCarts(arrangePileCards));
-  // const [selectedCards, setSelectedCards] = useState([]);
+  console.log('render');
   useEffect(() => {
-    console.log(selectedCards.length);
-    console.log(cards);
-
-    //    console.log('random select :', selectedCards);
     if (selectedCards.length === 2) {
       arrangingCards(cards, selectedCards, setCards);
       setSelectedCards([]);
@@ -21,13 +23,22 @@ function ArrangePiles({arrangePileCards, boardClick, setBoardClick,selectedCards
       }
       setBoardClick(false);
     }
-  }, [selectedCards, cards, boardClick, setBoardClick, setSelectedCards, setCards]);
+  }, [
+    selectedCards,
+    cards,
+    boardClick,
+    setBoardClick,
+    setSelectedCards,
+    setCards,
+  ]);
 
   return (
     <Container>
       {cards?.map((pile, i) => {
         return (
           <ArrangePile
+            setCards={setCards}
+            cards={cards}
             key={i}
             pile={pile}
             pileIndex={i.toString()}

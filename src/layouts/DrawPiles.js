@@ -8,9 +8,6 @@ function Draw({ drawCard }) {
   const [drawPile, setDrawPile] = useState([]);
   const [compteur, setCompteur] = useState(0);
 
-  console.log(compteur);
-  console.log(pickPile);
-
   if (compteur === pickPile.length) {
     setCompteur(0);
   }
