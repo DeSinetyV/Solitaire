@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Card from '../components/Card';
 import styled from 'styled-components';
 import '../style/Pile.css'
-import { arrangingCards } from '../utils';
 
-function Draw({ drawCard, selectedCards,setSelectedCards,boardClick, setBoardClick,setArrangePileCards, arrangePileCards }) {
-  const [pickPile, setPickPile] = useState(drawCard);
-  const [drawPile, setDrawPile] = useState([]);
-  const [compteur, setCompteur] = useState(0);
+function Draw({ pickPile,setSelectedCards}) {
+  const [compteur, setCompteur] = useState(0); // Compteur -> boucler sur les cartes de la pioche
 
-  if (compteur === pickPile.length) {
+  if (compteur === pickPile.length) {  // Retour à 0 du compteur
     setCompteur(0);
   }
   const pickCart =
-    compteur === pickPile.length ? pickPile[0] : pickPile[compteur];
-  pickCart.displayed = true;
-
+    compteur === pickPile.length ? pickPile[0] : pickPile[compteur]; // Affichage quand la pile est vide
+  if(pickCart) {
+    pickCart.displayed = true; // Affiche la carte 
+  }
+  console.log(pickCart)
   return (
     <Container>
-      <PileCard onClick={() => setCompteur((prev) => prev + 1)}>
+      <PileCard onClick={() => setCompteur((prev) => prev + 1)}> 
         <img
           className='cart'
           src='../../images/CardsFaces/back_card.jpg'
@@ -37,6 +36,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   width: 90%;
+
 `;
 const PileCard = styled.div`
   .cart {
