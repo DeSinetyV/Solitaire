@@ -48,13 +48,13 @@ function ArrangePile({
     }),
     [dragCards, pile, cards, pileIndex],
   );
-  //  console.log(dragCards.current, 'dragging', draggingCard);
+  console.log(dragCards.current, 'dragging', draggingCard);
 
   useEffect(() => {
     if (draggingCard) {
       dragCards.current = dragCardsList(draggingCard, cards);
     }
-    if (indexPile && dragCards.current) {
+    if (indexPile &&dragCards.current) {
       removeExtractedCards(cards, setCards, dragCards, indexPile);
       setIndexPile(null);
     }

@@ -19,45 +19,75 @@ export function arrangingCards(cards, selectedCards, setCards) {
       selectedCards[0].color !== selectedCards[1].color) ||
     typeof selectedCards[1] === 'string'
   ) {
+
     cards.map((pile) => {
-      if (pile.includes(selectedCards[0])) {
-        arr = pile.slice(pile.indexOf(selectedCards[0]));
+      // if (!cards.includes(selectedCards[0]) && pile.includes(selectedCards[1])) {
+
+      //                   pile = [...pile,selectedCards[0]]
+
+
+
+      //                   const res = cards.map((pile, i) => {
+      //                     if (pile.includes(selectedCards[1])) {
+      //                       pile = [...pile,selectedCards[0]]
+      //                       //  var test = selectedCards[0]
+
+      //                       //  test.id -=  1
+
+      //                       arrangingGoalCards(cards, selectedCards)
+      //                     }
+                        
+                    
+      //                     // display the last card of each pile by adding displayed property
+      //                     if (pile.length > 0 && !pile[pile.length - 1].displayed) {
+      //                       pile[pile.length - 1].displayed = true;
+      //                     }
+      //                     return pile;
+      //                   });
+      //                   setCards(res);
+
+
+
+
+      // }
+      // else
+       if (pile.includes(selectedCards[0])) {
+                      arr = pile.slice(pile.indexOf(selectedCards[0]));
+
+
+
+
+                      const res = cards.map((pile, i) => {
+
+                        if (pile.includes(selectedCards[0])) {
+                          pile.splice(pile.indexOf(selectedCards[0]));
+                        }
+                        if (
+                          pile.includes(selectedCards[1]) ||
+                          selectedCards[1] === i.toString()
+                        ) {
+                          pile = [...pile, ...arr];
+                        }
+                      
+                  
+                        // display the last card of each pile by adding displayed property
+                        if (pile.length > 0 && !pile[pile.length - 1].displayed) {
+                          pile[pile.length - 1].displayed = true;
+                        }
+                        return pile;
+                      });
+                      setCards(res);
+
+
       }
       return pile;
     });
-    const res = cards.map((pile, i) => {
-      if (pile.includes(selectedCards[0])) {
-        pile.splice(pile.indexOf(selectedCards[0]));
-      }
-      if (
-        pile.includes(selectedCards[1]) ||
-        selectedCards[1] === i.toString()
-      ) {
-        pile = [...pile, ...arr];
-      }
-      // display the last card of each pile by adding displayed property
-      if (pile.length > 0 && !pile[pile.length - 1].displayed) {
-        pile[pile.length - 1].displayed = true;
-      }
-      return pile;
-    });
-    setCards(res);
   }
 }
 
-// export function arrangingGoalCards(cards, selectedCards, setCards) {
-//   let arr = [];
-//   // if (
-//   //   (selectedCards[0].id === selectedCards[1].id + 1 &&
-//   //     selectedCards[0].category === selectedCards[1].category) ||
-//   //   typeof selectedCards[1] === 'string'
-//   // ) {
-//     console.log(cards)
 
 export function arrangingGoalCards(cards, selectedCards, setCards) {
-  console.log(cards);
-  console.log(selectedCards);
-  console.log(selectedCards[0]);
+
 
   let arr = [];
   // if (
@@ -65,13 +95,11 @@ export function arrangingGoalCards(cards, selectedCards, setCards) {
   //     selectedCards[0].category === selectedCards[1].category) ||
   //   typeof selectedCards[1] === 'string'
   // ) {
-  console.log(cards);
+
 
   cards.map((pile) => {
     if (pile.includes(selectedCards[0])) {
-      console.log(pile);
       arr = pile.pop();
-      console.log(arr);
       if (pile.length > 0) pile[pile.length - 1].displayed = true;
     }
     return pile;

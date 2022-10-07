@@ -13,6 +13,9 @@ function ArrangePiles({
 }) {
   useEffect(() => {
     if (selectedCards.length === 2) {
+      // console.log(selectedCards);
+      
+
       arrangingCards(cards, selectedCards, setCards);
       setSelectedCards([]);
     }

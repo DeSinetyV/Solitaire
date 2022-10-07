@@ -32,7 +32,7 @@ function Card({ cart, setSelectedCards, cartIndex, setAddToGoalPile }) {
       <img
         ref={drag}
         onClick={() => {
-          setAddToGoalPile(true);
+          if (setAddToGoalPile) setAddToGoalPile(true);
         }}
         src={
           cart.displayed
