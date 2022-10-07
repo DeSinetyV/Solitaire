@@ -4,6 +4,7 @@ import { addSelectedToCards, arrangingGoalCards } from '../utils';
 import Card from './Card';
 import styled from 'styled-components';
 import CardPlaceholder from './CardPlaceholder';
+import { useDrop } from 'react-dnd';
 
 function GoalPile({
   category,
@@ -15,11 +16,48 @@ function GoalPile({
 }) {
   const [cards, setCards] = useState([]);
 
+
   const [lastPileCard, setLastPileCards] = useState({ number: 0 });
 
   const [addToGoalPile, setAddToGoalPile] = useState(false);
 
+  const [dragCard, setDragCard] = useState(null);
 
+  const [{ isOver, draggingCard }, dropTarget] = useDrop(
+    () => ({
+      accept: 'CARD',
+      drop: (item) => {
+          setDragCard(item)
+          setCards(prev =>[...prev,item])
+  console.log(item)
+
+      },
+      canDrop: (item) => {
+        if (cards.length === 0 && item.number === 1 ) {
+          return true;
+        } else {
+          return (
+            item.number - 1 === cards[cards.length - 1].number &&
+            item.category === cards[cards.length - 1].category
+          );
+        }
+      },
+      collect: (monitor) => ({
+        isOver: !!monitor.isOver(),
+        draggingCard: monitor.getItem(),
+      }),
+    }),
+    [cards],
+  );
+
+  useEffect(() =>{
+    if (dragCard){
+     const newCarts = carts.map(pile => pile.filter(cart=> cart.id !== dragCard.id))
+     setCarts(newCarts)
+     setDragCard(null)
+    }
+    
+  },[carts, setCarts,dragCard,setDragCard])
   useEffect(() => {
     // console.log(addToGoalPile);
     if (selectedCards.length > 0 && addToGoalPile) {
@@ -57,7 +95,8 @@ function GoalPile({
 
   if (cards.length > 0) {
     return (
-      <Pile>
+      <Pile 
+      ref={dropTarget}>
         <Card
           key={`${lastPileCard.id}${lastPileCard.category}`}
           cart={lastPileCard}
@@ -70,7 +109,7 @@ function GoalPile({
   }
   return (
     <div
-      className='test'
+    ref={dropTarget}
       onClick={() => {
         setAddToGoalPile(true);
       }}
