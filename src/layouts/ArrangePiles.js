@@ -3,15 +3,26 @@ import styled from 'styled-components';
 import ArrangePile from '../components/ArrangePile';
 import { arrangingCards, distributeCarts } from '../utils';
 
+// function ArrangePiles({
+//   arrangePileCards,
+//   boardClick,
+//   setBoardClick,
+//   selectedCards,
+//   setSelectedCards,
+// }) {
+//   const [cards, setCards] = useState(distributeCarts(arrangePileCards));
+//   console.log('render');
 function ArrangePiles({
   arrangePileCards,
   boardClick,
   setBoardClick,
   selectedCards,
   setSelectedCards,
+  cards,
+  setCards,
 }) {
   const [cards, setCards] = useState(distributeCarts(arrangePileCards));
-  console.log('render');
+  const [selectedCards, setSelectedCards] = useState([]);
   useEffect(() => {
     if (selectedCards.length === 2) {
       arrangingCards(cards, selectedCards, setCards);

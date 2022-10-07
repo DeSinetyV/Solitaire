@@ -5,13 +5,14 @@ import CardPlaceholder from '../components/CardPlaceholder';
 import GoalPile from '../components/GoalPile';
 // import { arrangingCards } from '../utils';
 
-function GoalPiles({ selectedCards, setSelectedCards, cards, setCards }) {
-  const [categorys, setCategorys] = useState([
-    'clubs',
-    'diamonds',
-    'hearts',
-    'spades',
-  ]);
+function GoalPiles({selectedCards,setSelectedCards,cards ,setCards}) {
+  // const [cards, setCards] = useState ([]);
+  console.log(cards);
+  console.log(selectedCards)
+  console.log(selectedCards.length)
+
+
+  const [categorys, setCategorys] = useState (['clubs','diamonds','hearts','spades']);
 
   return (
     <Container>
