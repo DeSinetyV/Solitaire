@@ -22,18 +22,15 @@ export function arrangingCards(cards, selectedCards, setCards) {
 
     cards.map((pile) => {
       // if (!cards.includes(selectedCards[0]) && pile.includes(selectedCards[1])) {
-      //                   console.log('COUCOU');
-      //                   console.log(selectedCards[0]);
-      //                   console.log(pile);
+
       //                   pile = [...pile,selectedCards[0]]
-      //                   console.log(pile);
+
 
 
       //                   const res = cards.map((pile, i) => {
       //                     if (pile.includes(selectedCards[1])) {
       //                       pile = [...pile,selectedCards[0]]
       //                       //  var test = selectedCards[0]
-      //                       // console.log(test)
 
       //                       //  test.id -=  1
 
@@ -90,9 +87,7 @@ export function arrangingCards(cards, selectedCards, setCards) {
 
 
 export function arrangingGoalCards(cards, selectedCards, setCards) {
-  console.log(cards);
-  console.log(selectedCards);
-  console.log(selectedCards[0]);
+
 
   let arr = [];
   // if (
@@ -100,13 +95,11 @@ export function arrangingGoalCards(cards, selectedCards, setCards) {
   //     selectedCards[0].category === selectedCards[1].category) ||
   //   typeof selectedCards[1] === 'string'
   // ) {
-  console.log(cards);
+
 
   cards.map((pile) => {
     if (pile.includes(selectedCards[0])) {
-      console.log(pile);
       arr = pile.pop();
-      console.log(arr);
       if (pile.length > 0) pile[pile.length - 1].displayed = true;
     }
     return pile;

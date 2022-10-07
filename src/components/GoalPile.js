@@ -15,20 +15,19 @@ function GoalPile({
 }) {
   const [cards, setCards] = useState([]);
 
-  const [lastPileCard, setLastPileCards] = useState({ id: 0 });
+  const [lastPileCard, setLastPileCards] = useState({ number: 0 });
 
   const [addToGoalPile, setAddToGoalPile] = useState(false);
 
-  // console.log('1',{selectedCards})
+
   useEffect(() => {
-    console.log(addToGoalPile);
+    // console.log(addToGoalPile);
     if (selectedCards.length > 0 && addToGoalPile) {
-      console.log(lastPileCard);
-      console.log(selectedCards[0].id);
-      console.log(selectedCards[0].category);
+
 
       if (
-        selectedCards[0].id === lastPileCard.id + 1 &&
+        selectedCards[0].number === lastPileCard.number + 1
+         &&
         selectedCards[0].category === category
       ) {
         arrangingGoalCards(carts, selectedCards, setCarts);
@@ -54,7 +53,7 @@ function GoalPile({
     carts,
     setCarts,
   ]);
-  // console.log(cards);
+
 
   if (cards.length > 0) {
     return (
