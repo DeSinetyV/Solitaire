@@ -31,8 +31,8 @@ function GoalPile({
       drop: (item) => {
           setDragCard(item)
           setCards(prev =>[...prev,item])
-          console.log(dragCards.current)
-  console.log(item)
+          console.log(cards)
+          console.log(item)
 
       },
       canDrop: (item) => {
@@ -61,23 +61,17 @@ function GoalPile({
 //       setCards(prev => prev.filter(cart=> cart.id !== dragCard.id))
 console.log(cards);
 
-    const pile = carts.map(pile =>{
-      if(pile.includes(dragCard)){
-        if(pile.length >= 2 ) pile[pile.length-2].displayed = true
-        // console.log(pile[pile.length-2])
-      
+    carts.map(pile =>{if(pile.includes(dragCard) && pile.length >= 2 ) pile[pile.length-2].displayed = true})
 
-      }})
+    const newCarts = carts.map(pile => pile.filter(cart=> cart.id !== dragCard.id))
 
-
-     const newCarts = carts.map(pile => pile.filter(cart=> cart.id !== dragCard.id))
-     setCarts(newCarts)
-     setDragCard(null)
+    setCarts(newCarts)
+    setDragCard(null)
     }
-    
+
   },[carts, setCarts,dragCard,setDragCard,cards])
 
-  
+
   useEffect(() => {
     // console.log(addToGoalPile);
     if (selectedCards.length > 0 && addToGoalPile) {
@@ -88,6 +82,37 @@ console.log(cards);
          &&
         selectedCards[0].category === category
       ) {
+        console.log('COUCOU')
+    console.log(category,' : ', selectedCards.length, selectedCards[0])
+    console.log(cards)
+
+    if (category === 'clubs') goalCards[0] = [...cards,selectedCards[0]]
+    if (category === 'diamonds') goalCards[1] =  [...cards,selectedCards[0]]
+    if (category === 'hearts') goalCards[2] =  [...cards,selectedCards[0]]
+    if (category === 'spades') goalCards[3] =  [...cards,selectedCards[0]]
+
+
+    // if (category === 'diamonds') setGoalCards ((prev) => [...prev[0]],[...prev[1], [cards]],[...prev[2]],[...prev[3]])
+    // if (category === 'hearts') setGoalCards ((prev) => [...prev[0]],[...prev[1]],[...prev[2], [cards]],[...prev[3]])
+    // if (category === 'spades') setGoalCards ((prev) => [...prev[0]],[...prev[1]],[...prev[2]],[...prev[3], [cards]])
+
+
+
+
+
+    // if (category === 'clubs')setGoalCards[0]([cards])
+    // if (category === 'diamonds')setGoalCards[1]([cards])
+    // if (category === 'hearts')setGoalCards[2]([cards])
+    // if (category === 'spades')setGoalCards[3]([cards])
+
+    console.log(goalCards)
+
+    // setGoalCards('test')
+    // console.log(goalCards)
+
+    console.log(cards)
+    console.log(goalCards)
+
         arrangingGoalCards(carts, selectedCards, setCarts);
         setCards((prev) => [...prev, selectedCards[0]]);
         setSelectedCards([]);
@@ -96,11 +121,15 @@ console.log(cards);
         setAddToGoalPile(false);
         setSelectedCards([]);
       }
+
     }
     console.log(category,' : ', cards.length, cards)
     if (cards.length > 0) {
+
       setLastPileCards([...cards].pop());
     }
+
+
   }, [
     selectedCards,
     cards,
@@ -109,13 +138,13 @@ console.log(cards);
     setSelectedCards,
     addToGoalPile,
     carts,
-    setCarts,
+    setCarts,setGoalCards,goalCards
   ]);
 
 
   if (cards.length > 0) {
     return (
-      <Pile 
+      <Pile
       ref={dropTarget}>
         <Card
           key={`${lastPileCard.id}${lastPileCard.category}`}

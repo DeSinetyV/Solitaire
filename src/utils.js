@@ -25,39 +25,40 @@ export function arrangingCards(cards, selectedCards, setCards) {
   ) {
 
     cards.map((pile) => { 
-      if (!cards.includes(selectedCards[0]) && pile.includes(selectedCards[1])) {
-      console.log('COUCOU');
-      console.log(selectedCards[0]);
-      console.log(pile);
-      pile = [...pile,selectedCards[0]]
-      console.log(pile);
+    //   if (!cards.includes(selectedCards[0]) && pile.includes(selectedCards[1])) {
+    //   console.log('COUCOU');
+    //   console.log(selectedCards[0]);
+    //   console.log(pile);
+    //   pile = [...pile,selectedCards[0]]
+    //   console.log(pile);
 
 
-      const res = cards.map((pile, i) => {
-        if (pile.includes(selectedCards[1])) {
-          pile = [...pile,selectedCards[0]]
-          //  var test = selectedCards[0]
-          // console.log(test)
+    //   const res = cards.map((pile, i) => {
+    //     if (pile.includes(selectedCards[1])) {
+    //       pile = [...pile,selectedCards[0]]
+    //       //  var test = selectedCards[0]
+    //       // console.log(test)
 
-          //  test.id -=  1
+    //       //  test.id -=  1
 
-          arrangingGoalCards(cards, selectedCards)
-        }
+    //       arrangingGoalCards(cards, selectedCards)
+    //     }
       
   
-        // display the last card of each pile by adding displayed property
-        if (pile.length > 0 && !pile[pile.length - 1].displayed) {
-          pile[pile.length - 1].displayed = true;
-        }
-        return pile;
-      });
-      setCards(res);
+    //     // display the last card of each pile by adding displayed property
+    //     if (pile.length > 0 && !pile[pile.length - 1].displayed) {
+    //       pile[pile.length - 1].displayed = true;
+    //     }
+    //     return pile;
+    //   });
+    //   setCards(res);
 
 
 
 
-      }
-      else if (pile.includes(selectedCards[0])) {
+    //   }
+    //   else 
+    if (pile.includes(selectedCards[0])) {
                       arr = pile.slice(pile.indexOf(selectedCards[0]));
 
 
@@ -87,7 +88,7 @@ export function arrangingCards(cards, selectedCards, setCards) {
 
       }
       return pile;
-    });
+  });
   }
 }
 

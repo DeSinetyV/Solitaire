@@ -21,8 +21,8 @@ function GoalPiles({selectedCards,setSelectedCards,cards ,setCards,goalCards,set
             setSelectedCards={setSelectedCards}
             carts={cards}
             setCarts={setCards}
-            cards={goalCards}
-            setCards={setGoalCards}
+            goalCards={goalCards}
+            setGoalCards={setGoalCards}
           />
         );
       })}
