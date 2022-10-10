@@ -28,8 +28,10 @@ function Gameboard() {
             cards={cards}
             setCards={setCards}
             goalCards={goalCards}
+            setGoalCards={setGoalCards}
             selectedCards={selectedCards}
             setSelectedCards={setSelectedCards}
+            setPickPile = {setPickPileCards}
           />
         </TopContent>
         <BottomContent>

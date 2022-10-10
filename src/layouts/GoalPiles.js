@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import GoalPile from '../components/GoalPile';
 // import { arrangingCards } from '../utils';
 
-function GoalPiles({selectedCards,setSelectedCards,cards ,setCards}) {
+function GoalPiles({selectedCards,setSelectedCards,cards ,setCards,goalCards,setGoalCards}) {
 
   const [categorys, setCategorys] = useState (['clubs','diamonds','hearts','spades']);
 
@@ -21,6 +21,8 @@ function GoalPiles({selectedCards,setSelectedCards,cards ,setCards}) {
             setSelectedCards={setSelectedCards}
             carts={cards}
             setCarts={setCards}
+            cards={goalCards}
+            setCards={setGoalCards}
           />
         );
       })}

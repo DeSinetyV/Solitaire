@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useRef } from 'react';
 import { React } from 'react';
 import { addSelectedToCards, arrangingGoalCards } from '../utils';
 import Card from './Card';
@@ -13,6 +13,8 @@ function GoalPile({
   pileIndex,
   carts,
   setCarts,
+  goalCards,
+  setGoalCards
 }) {
   const [cards, setCards] = useState([]);
 
@@ -20,7 +22,7 @@ function GoalPile({
   const [lastPileCard, setLastPileCards] = useState({ number: 0 });
 
   const [addToGoalPile, setAddToGoalPile] = useState(false);
-
+  const dragCards = useRef(null);
   const [dragCard, setDragCard] = useState(null);
 
   const [{ isOver, draggingCard }, dropTarget] = useDrop(
@@ -29,13 +31,16 @@ function GoalPile({
       drop: (item) => {
           setDragCard(item)
           setCards(prev =>[...prev,item])
+          console.log(dragCards.current)
   console.log(item)
 
       },
       canDrop: (item) => {
         if (cards.length === 0 && item.number === 1 ) {
           return true;
-        } else {
+        } else if (cards.length >=1) {
+          console.log('coucou')
+          console.log(carts)
           return (
             item.number - 1 === cards[cards.length - 1].number &&
             item.category === cards[cards.length - 1].category
@@ -51,13 +56,28 @@ function GoalPile({
   );
 
   useEffect(() =>{
+
     if (dragCard){
+//       setCards(prev => prev.filter(cart=> cart.id !== dragCard.id))
+console.log(cards);
+
+    const pile = carts.map(pile =>{
+      if(pile.includes(dragCard)){
+        if(pile.length >= 2 ) pile[pile.length-2].displayed = true
+        // console.log(pile[pile.length-2])
+      
+
+      }})
+
+
      const newCarts = carts.map(pile => pile.filter(cart=> cart.id !== dragCard.id))
      setCarts(newCarts)
      setDragCard(null)
     }
     
-  },[carts, setCarts,dragCard,setDragCard])
+  },[carts, setCarts,dragCard,setDragCard,cards])
+
+  
   useEffect(() => {
     // console.log(addToGoalPile);
     if (selectedCards.length > 0 && addToGoalPile) {
@@ -77,7 +97,7 @@ function GoalPile({
         setSelectedCards([]);
       }
     }
-
+    console.log(category,' : ', cards.length, cards)
     if (cards.length > 0) {
       setLastPileCards([...cards].pop());
     }
