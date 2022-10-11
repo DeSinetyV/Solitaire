@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { React } from 'react';
-import { addSelectedToCards, arrangingGoalCards } from '../utils';
+import { arrangingGoalCards } from '../utils';
 import Card from './Card';
 import styled from 'styled-components';
 import CardPlaceholder from './CardPlaceholder';
@@ -17,7 +17,6 @@ function GoalPile({
   pickPileCards,
 }) {
   const [addToGoalPile, setAddToGoalPile] = useState(false);
-  const [dragCard, setDragCard] = useState(null);
   const { category, cards } = pile;
   const [{ isOver }, dropTarget] = useDrop(
     () => ({
@@ -34,11 +33,8 @@ function GoalPile({
           setCardsToArrange(
             newCarts.map((pile) => {
               if (pile.length > 0) {
-                if (Object.hasOwn(pile[pile.length - 1], 'displayed')) {
-                  return pile;
-                } else {
+                if (!Object.hasOwn(pile[pile.length - 1], 'displayed')) {
                   pile[pile.length - 1].displayed = true;
-                  return pile;
                 }
               }
               return pile;
@@ -72,10 +68,9 @@ function GoalPile({
         isOver: !!monitor.isOver(),
       }),
     }),
-    [cards],
+    [cardsToArrange],
   );
 
-  
   useEffect(() => {
     if (selectedCards.length > 0 && addToGoalPile) {
       if (

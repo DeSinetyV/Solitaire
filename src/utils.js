@@ -137,6 +137,7 @@ export function dragCardsList(draggingCard, cards) {
       return p;
     });
   }
+  
   return sliced;
 }
 export function insertExtractedCards(cards, indexPile, draggingCards) {

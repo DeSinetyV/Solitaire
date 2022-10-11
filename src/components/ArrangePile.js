@@ -18,7 +18,6 @@ function ArrangePile({
   cardsToArrange,
   pickPile,
   setPickPile,
-  goalCards,
   setGoalCards,
 }) {
   const [{ isOver, draggingCard }, dropTarget] = useDrop(
@@ -37,8 +36,8 @@ function ArrangePile({
           if (pickPile.indexOf(item) !== -1) {
             setPickPile((prev) => prev.filter((cart) => cart.id !== item.id));
           } else {
-            setGoalCards(
-              goalCards.map((pile) => {
+            setGoalCards((prev) =>
+              prev.map((pile) => {
                 return {
                   category: pile.category,
                   cards: pile.cards.filter((card) => card.id !== item.id),

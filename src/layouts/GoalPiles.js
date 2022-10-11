@@ -1,28 +1,33 @@
 import React from 'react';
-import { useState } from 'react';
 import styled from 'styled-components';
 // import CardPlaceholder from '../components/CardPlaceholder';
 import GoalPile from '../components/GoalPile';
 // import { arrangingCards } from '../utils';
 
-function GoalPiles({selectedCards,setSelectedCards,cards ,setCards,goalCards,setGoalCards}) {
-
-  const [categorys, setCategorys] = useState (['clubs','diamonds','hearts','spades']);
-
+function GoalPiles({
+  selectedCards,
+  setSelectedCards,
+  cardsToArrange,
+  setCardsToArrange,
+  goalCards,
+  setGoalCards,
+  pickPileCards,
+  setPickPileCards,
+}) {
   return (
     <Container>
-      {categorys?.map((category, i) => {
+      {goalCards?.map((pile) => {
         return (
           <GoalPile
-            key={i}
-            category={category}
-            pileIndex={i.toString()}
+            key={pile.category}
+            pile={pile}
             selectedCards={selectedCards}
             setSelectedCards={setSelectedCards}
-            carts={cards}
-            setCarts={setCards}
-            goalCards={goalCards}
+            cardsToArrange={cardsToArrange}
+            setCardsToArrange={setCardsToArrange}
             setGoalCards={setGoalCards}
+            pickPileCards={pickPileCards}
+            setPickPileCards={setPickPileCards}
           />
         );
       })}

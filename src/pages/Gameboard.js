@@ -4,20 +4,22 @@ import { CARDS } from '../data';
 import ArrangePiles from '../layouts/ArrangePiles';
 import { distributeCarts } from '../utils';
 import GoalPiles from '../layouts/GoalPiles';
-import PickPiles from '../layouts/PickPiles';
 import '../style/Pile.css';
 import Draw from '../layouts/DrawPiles';
 
 function Gameboard() {
-  const [desk, setDesk] = useState([...CARDS]);
-  const [arrangePileCards, setArrangePileCards] = useState([
-    ...desk.slice(0, 28),
-  ]);
-  const [pickPileCards, setPickPileCards] = useState([...desk.slice(28)]);
+  const [cardsToArrange, setCardsToArrange] = useState(
+    distributeCarts(CARDS.slice(0, 28)),
+  );
+  const [pickPileCards, setPickPileCards] = useState(CARDS.slice(28));
   const [selectedCards, setSelectedCards] = useState([]);
-  const [boardClick, setBoardClick] = useState(false);
-  const [goalCards, setGoalCards] = useState([]);
-  const [cards, setCards] = useState(distributeCarts(arrangePileCards));
+  //const [boardClick, setBoardClick] = useState(false);
+  const [goalCards, setGoalCards] = useState([
+    { category: 'clubs', cards: [] },
+    { category: 'diamonds', cards: [] },
+    { category: 'hearts', cards: [] },
+    { category: 'spades', cards: [] },
+  ]);
 
   return (
     <GameboardContainer>
@@ -28,20 +30,21 @@ function Gameboard() {
             setSelectedCards={setSelectedCards}
           ></Draw>
           <GoalPiles
-            cards={cards}
-            setCards={setCards}
+            cardsToArrange={cardsToArrange}
+            setCardsToArrange={setCardsToArrange}
             goalCards={goalCards}
             setGoalCards={setGoalCards}
             selectedCards={selectedCards}
             setSelectedCards={setSelectedCards}
             setPickPile={setPickPileCards}
+            pickPileCards={pickPileCards}
+            setPickPileCards={setPickPileCards}
           />
         </TopContent>
         <BottomContent>
           <ArrangePiles
-            cards={cards}
-            setCards={setCards}
-            arrangePileCards={arrangePileCards}
+            cardsToArrange={cardsToArrange}
+            setCardsToArrange={setCardsToArrange}
             selectedCards={selectedCards}
             setSelectedCards={setSelectedCards}
             pickPile={pickPileCards}

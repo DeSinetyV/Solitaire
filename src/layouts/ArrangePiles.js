@@ -8,8 +8,8 @@ function ArrangePiles({
   setBoardClick,
   selectedCards,
   setSelectedCards,
-  cards,
-  setCards,
+  cardsToArrange,
+  setCardsToArrange,
   pickPile,
   setPickPile,
   goalCards,
@@ -19,7 +19,7 @@ function ArrangePiles({
     if (selectedCards.length === 2) {
       console.log(selectedCards);
 
-      arrangingCards(cards, selectedCards, setCards);
+      arrangingCards(cardsToArrange, selectedCards, setCardsToArrange);
       if (
         (selectedCards[0].number + 1 === selectedCards[1].number &&
           selectedCards[0].color !== selectedCards[1].color &&
@@ -36,8 +36,8 @@ function ArrangePiles({
           });
         });
 
-        setCards(
-          cards.map((pile) => {
+        setCardsToArrange(
+          cardsToArrange.map((pile) => {
             if (pile.includes(selectedCards[1])) {
               pile.splice(
                 pile.indexOf(selectedCards[1]) + 1,
@@ -59,22 +59,22 @@ function ArrangePiles({
     }
   }, [
     selectedCards,
-    cards,
+    cardsToArrange,
     boardClick,
     setBoardClick,
     setSelectedCards,
-    setCards,
+    setCardsToArrange,
     pickPile,
     setPickPile,
   ]);
 
   return (
     <Container>
-      {cards?.map((pile, i) => {
+      {cardsToArrange?.map((pile, i) => {
         return (
           <ArrangePile
-            setCards={setCards}
-            cards={cards}
+            setCardsToArrange={setCardsToArrange}
+            cardsToArrange={cardsToArrange}
             key={i}
             pile={pile}
             pileIndex={i.toString()}
@@ -82,7 +82,6 @@ function ArrangePiles({
             selectedCards={selectedCards}
             pickPile={pickPile}
             setPickPile={setPickPile}
-            goalCards={goalCards}
             setGoalCards={setGoalCards}
           />
         );
