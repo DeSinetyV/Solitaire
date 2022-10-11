@@ -31,7 +31,7 @@ function Draw({ pickPile, setSelectedCards }) {
               <PileCard key={i} index={i}>
                 <img
                   className='cart'
-                  src='../../images/CardsFaces/back_card.jpg'
+                  src='images/CardsFaces/back_card.jpg'
                   alt={card.id}
                 />
               </PileCard>
