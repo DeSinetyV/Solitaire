@@ -80,8 +80,13 @@ function ArrangePiles({
 const Container = styled.div`
   display: flex;
   width: 100%;
+<<<<<<< HEAD
   justify-content: space-around;
 ;
+=======
+  height: 100%;
+  justify-content: space-around; ;
+>>>>>>> 1762117 (dnd finished)
 `;
 
 export default ArrangePiles;

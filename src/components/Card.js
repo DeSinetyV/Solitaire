@@ -55,6 +55,7 @@ const Frame = styled.div`
     cartIndex ? `position: absolute; top: ${Number(cartIndex) * 15}px` : ''};
   img {
     width: 100px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
     border-radius: 0.4rem;
   }
 `;

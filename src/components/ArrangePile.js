@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 import React, { useEffect, useState, useRef } from 'react';
+=======
+import React, { memo } from 'react';
+>>>>>>> 1762117 (dnd finished)
 import { useDrop } from 'react-dnd';
 import styled from 'styled-components';
 import {
   addSelectedToCards,
   dragCardsList,
-  removeExtractedCards,
+  insertExtractedCards,
 } from '../utils';
 import Card from './Card';
 import CardPlaceholder from './CardPlaceholder';
@@ -19,20 +23,52 @@ function ArrangePile({
   pickPile,
   setPickPile
 }) {
+<<<<<<< HEAD
   const [indexPile, setIndexPile] = useState(null);
   const dragCards = useRef(null);
   const [dragCard, setDragCard] = useState(null);
 
+=======
+>>>>>>> 1762117 (dnd finished)
   const [{ isOver, draggingCard }, dropTarget] = useDrop(
     () => ({
       accept: 'CARD',
       drop: (item) => {
+<<<<<<< HEAD
         setIndexPile(pileIndex);
         if (dragCards.current) {
           pile.splice(pile.length, 0, ...dragCards.current);
         } else {
           setDragCard(item);
           pile.push(item);
+=======
+        if (cardsToArrange.flat().indexOf(item) !== -1) {
+          setCardsToArrange(
+            insertExtractedCards(
+              cardsToArrange,
+              pileIndex,
+              dragCardsList(item, cardsToArrange),
+            ),
+          );
+        } else {
+          if (pickPile.indexOf(item) !== -1) {
+            setPickPile((prev) => prev.filter((cart) => cart.id !== item.id));
+          } else {
+            setGoalCards(
+              goalCards.map((pile) => {
+                return {
+                  category: pile.category,
+                  cards: pile.cards.filter((card) => card.id !== item.id),
+                };
+              }),
+            );
+          }
+          setCardsToArrange(
+            cardsToArrange.map((pile, i) => {
+              return pileIndex === i.toString() ? [...pile, item] : pile;
+            }),
+          );
+>>>>>>> 1762117 (dnd finished)
         }
       },
       canDrop: (item) => {
@@ -50,6 +86,7 @@ function ArrangePile({
         draggingCard: monitor.getItem(),
       }),
     }),
+<<<<<<< HEAD
     [dragCards, pile, cards, pileIndex,dragCard,pickPile],
   );
 
@@ -66,6 +103,11 @@ function ArrangePile({
     }
   }, [draggingCard, cards, indexPile, setCards, setIndexPile, dragCards,dragCard,setPickPile]);
 
+=======
+    [cardsToArrange],
+  );
+
+>>>>>>> 1762117 (dnd finished)
   if (pile.includes(selectedCards[0])) {
     addSelectedToCards(pile, selectedCards);
   } else {
@@ -77,12 +119,23 @@ function ArrangePile({
       <Pile isOver={isOver} ref={dropTarget}>
         {pile.map((cart, i) => {
           return (
-            <Card
-              key={cart.id}
-              cart={cart}
-              cartIndex={i.toString()}
-              setSelectedCards={setSelectedCards}
-            />
+            <Layer
+              key={i.toString()}
+              hovering={
+                pile.indexOf(draggingCard) !== -1 &&
+                draggingCard &&
+                i > pile.indexOf(draggingCard)
+                  ? true
+                  : false
+              }
+            >
+              <Card
+                key={cart.id}
+                cart={cart}
+                cartIndex={i.toString()}
+                setSelectedCards={setSelectedCards}
+              />
+            </Layer>
           );
         })}
       </Pile>
@@ -101,10 +154,17 @@ function ArrangePile({
 }
 
 const Pile = styled.div`
-  height: 200px;
   width: 100px;
   position: relative;
   border: ${({ isOver }) => (isOver ? 'solid 2px blue' : 'none')};
 `;
 
+<<<<<<< HEAD
 export default ArrangePile;
+=======
+const Layer = styled.div`
+  opacity: ${({ hovering }) => (hovering ? '.5' : '1')};
+`;
+
+export default memo(ArrangePile);
+>>>>>>> 1762117 (dnd finished)

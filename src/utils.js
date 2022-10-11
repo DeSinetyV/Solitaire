@@ -97,11 +97,6 @@ export function arrangingGoalCards(cards, selectedCards, setCards) {
 
 
   let arr = [];
-  // if (
-  //   (selectedCards[0].id === selectedCards[1].id + 1 &&
-  //     selectedCards[0].category === selectedCards[1].category) ||
-  //   typeof selectedCards[1] === 'string'
-  // ) {
 
 
   cards.map((pile) => {
@@ -111,26 +106,7 @@ export function arrangingGoalCards(cards, selectedCards, setCards) {
     }
     return pile;
   });
-
-  // const res = cards.map((pile, i) => {
-  //   if (pile.pop()) {
-  //     pile.splice(pile.indexOf(selectedCards[0]));
-  //   }
-  //   // if (
-  //   //   pile.includes(selectedCards[1]) ||
-  //   //   selectedCards[1] === i.toString()
-  //   // ) {
-  //   //   pile = [...pile, ...arr];
-  //   // }
-  //   // display the last card of each pile by adding displayed property
-  //   // if (pile.length > 0 && !pile[pile.length - 1].displayed) {
-  //   //   pile[pile.length - 1].displayed = true;
-  //   // }
-  //   return pile;
-  // });
-  // setCards(res);
 }
-// }
 
 // add selected property to the displayed cards for highlighting them
 export function addSelectedToCards(pile, selectedCards) {
@@ -152,14 +128,23 @@ export function dragCardsList(draggingCard, cards) {
   let sliced = null;
   if (draggingCard) {
     cards.map((p) => {
+<<<<<<< HEAD
       if (p.some((card) => draggingCard.id === card.id)) {
         sliced = p.slice(p.indexOf(draggingCard));
+=======
+      if (p.indexOf(draggingCard) !== -1) {
+        sliced = p.splice(p.indexOf(draggingCard));
+        if (p.length > 0) {
+          p = p[p.length - 1].displayed = true;
+        }
+>>>>>>> 1762117 (dnd finished)
       }
       return p;
     });
   }
   return sliced;
 }
+<<<<<<< HEAD
 export function removeExtractedCards(cards, setCards, dragCards, indexPile) {
   let newCards = cards.map((pile, i) => {
     if (
@@ -175,4 +160,10 @@ export function removeExtractedCards(cards, setCards, dragCards, indexPile) {
     return pile;
   });
   setCards(newCards);
+=======
+export function insertExtractedCards(cards, indexPile, draggingCards) {
+  return cards.map((pile, i) =>
+    indexPile === i.toString() ? (pile = [...pile, ...draggingCards]) : pile,
+  );
+>>>>>>> 1762117 (dnd finished)
 }
