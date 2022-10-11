@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Solitaire_React/static/css/main.31d6cfe0.css",
-    "main.js": "/Solitaire_React/static/js/main.ebb41543.js",
-    "static/js/787.4a17cf5c.chunk.js": "/Solitaire_React/static/js/787.4a17cf5c.chunk.js",
-    "index.html": "/Solitaire_React/index.html",
-    "main.ebb41543.js.map": "/Solitaire_React/static/js/main.ebb41543.js.map",
-    "787.4a17cf5c.chunk.js.map": "/Solitaire_React/static/js/787.4a17cf5c.chunk.js.map"
+    "main.css": "/solitaire_react/static/css/main.31d6cfe0.css",
+    "main.js": "/solitaire_react/static/js/main.9481c084.js",
+    "static/js/787.4a17cf5c.chunk.js": "/solitaire_react/static/js/787.4a17cf5c.chunk.js",
+    "index.html": "/solitaire_react/index.html",
+    "main.9481c084.js.map": "/solitaire_react/static/js/main.9481c084.js.map",
+    "787.4a17cf5c.chunk.js.map": "/solitaire_react/static/js/787.4a17cf5c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.31d6cfe0.css",
-    "static/js/main.ebb41543.js"
+    "static/js/main.9481c084.js"
   ]
 }
