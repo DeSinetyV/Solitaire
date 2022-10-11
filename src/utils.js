@@ -128,42 +128,19 @@ export function dragCardsList(draggingCard, cards) {
   let sliced = null;
   if (draggingCard) {
     cards.map((p) => {
-<<<<<<< HEAD
-      if (p.some((card) => draggingCard.id === card.id)) {
-        sliced = p.slice(p.indexOf(draggingCard));
-=======
       if (p.indexOf(draggingCard) !== -1) {
         sliced = p.splice(p.indexOf(draggingCard));
         if (p.length > 0) {
           p = p[p.length - 1].displayed = true;
         }
->>>>>>> 1762117 (dnd finished)
       }
       return p;
     });
   }
   return sliced;
 }
-<<<<<<< HEAD
-export function removeExtractedCards(cards, setCards, dragCards, indexPile) {
-  let newCards = cards.map((pile, i) => {
-    if (
-      indexPile !== i.toString() &&
-      pile.some((card) => card.id === dragCards.current[0].id)
-    ) {
-      pile.splice(pile.indexOf(dragCards.current[0]));
-      if (pile.length > 0) {
-        pile[pile.length - 1].displayed = true;
-      }
-      return pile;
-    }
-    return pile;
-  });
-  setCards(newCards);
-=======
 export function insertExtractedCards(cards, indexPile, draggingCards) {
   return cards.map((pile, i) =>
     indexPile === i.toString() ? (pile = [...pile, ...draggingCards]) : pile,
   );
->>>>>>> 1762117 (dnd finished)
 }

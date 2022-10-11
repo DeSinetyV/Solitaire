@@ -23,7 +23,10 @@ function Gameboard() {
     <GameboardContainer>
       <Board>
         <TopContent>
-          <Draw pickPile={pickPileCards} setSelectedCards={setSelectedCards}></Draw>
+          <Draw
+            pickPile={pickPileCards}
+            setSelectedCards={setSelectedCards}
+          ></Draw>
           <GoalPiles
             cards={cards}
             setCards={setCards}
@@ -31,7 +34,7 @@ function Gameboard() {
             setGoalCards={setGoalCards}
             selectedCards={selectedCards}
             setSelectedCards={setSelectedCards}
-            setPickPile = {setPickPileCards}
+            setPickPile={setPickPileCards}
           />
         </TopContent>
         <BottomContent>
@@ -42,7 +45,9 @@ function Gameboard() {
             selectedCards={selectedCards}
             setSelectedCards={setSelectedCards}
             pickPile={pickPileCards}
-            setPickPile = {setPickPileCards}
+            setPickPile={setPickPileCards}
+            goalCards={goalCards}
+            setGoalCards={setGoalCards}
           />
         </BottomContent>
       </Board>

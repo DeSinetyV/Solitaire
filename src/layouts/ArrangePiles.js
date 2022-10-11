@@ -11,32 +11,44 @@ function ArrangePiles({
   cards,
   setCards,
   pickPile,
-  setPickPile
+  setPickPile,
+  goalCards,
+  setGoalCards,
 }) {
   useEffect(() => {
     if (selectedCards.length === 2) {
       console.log(selectedCards);
-      
 
       arrangingCards(cards, selectedCards, setCards);
       if (
         (selectedCards[0].number + 1 === selectedCards[1].number &&
-          selectedCards[0].color !== selectedCards[1].color && 
+          selectedCards[0].color !== selectedCards[1].color &&
           pickPile.includes(selectedCards[0])) ||
-          typeof selectedCards[1] === 'string'
+        typeof selectedCards[1] === 'string'
       ) {
+        setPickPile((prev) => {
+          console.log(prev);
+          return prev.filter((card) => {
+            return (
+              card.number !== selectedCards[0].number ||
+              card.category !== selectedCards[0].category
+            );
+          });
+        });
 
-      setPickPile(prev => {console.log(prev) ;return prev.filter(card => {
-        return card.number !== selectedCards[0].number || card.category !== selectedCards[0].category})
+        setCards(
+          cards.map((pile) => {
+            if (pile.includes(selectedCards[1])) {
+              pile.splice(
+                pile.indexOf(selectedCards[1]) + 1,
+                0,
+                selectedCards[0],
+              );
+            }
+            return pile;
+          }),
+        );
       }
-      )
-
-      setCards(cards.map(pile =>{
-        if(pile.includes(selectedCards[1])){
-          pile.splice(pile.indexOf(selectedCards[1])+1,0,selectedCards[0])
-        }
-        return pile
-      }))}
       setSelectedCards([]);
     }
     if (boardClick) {
@@ -53,7 +65,7 @@ function ArrangePiles({
     setSelectedCards,
     setCards,
     pickPile,
-    setPickPile
+    setPickPile,
   ]);
 
   return (
@@ -70,6 +82,8 @@ function ArrangePiles({
             selectedCards={selectedCards}
             pickPile={pickPile}
             setPickPile={setPickPile}
+            goalCards={goalCards}
+            setGoalCards={setGoalCards}
           />
         );
       })}
@@ -80,13 +94,8 @@ function ArrangePiles({
 const Container = styled.div`
   display: flex;
   width: 100%;
-<<<<<<< HEAD
-  justify-content: space-around;
-;
-=======
   height: 100%;
   justify-content: space-around; ;
->>>>>>> 1762117 (dnd finished)
 `;
 
 export default ArrangePiles;

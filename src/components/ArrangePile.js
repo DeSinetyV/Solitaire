@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useEffect, useState, useRef } from 'react';
-=======
 import React, { memo } from 'react';
->>>>>>> 1762117 (dnd finished)
 import { useDrop } from 'react-dnd';
 import styled from 'styled-components';
 import {
@@ -18,30 +14,17 @@ function ArrangePile({
   setSelectedCards,
   selectedCards,
   pileIndex,
-  setCards,
-  cards,
+  setCardsToArrange,
+  cardsToArrange,
   pickPile,
-  setPickPile
+  setPickPile,
+  goalCards,
+  setGoalCards,
 }) {
-<<<<<<< HEAD
-  const [indexPile, setIndexPile] = useState(null);
-  const dragCards = useRef(null);
-  const [dragCard, setDragCard] = useState(null);
-
-=======
->>>>>>> 1762117 (dnd finished)
   const [{ isOver, draggingCard }, dropTarget] = useDrop(
     () => ({
       accept: 'CARD',
       drop: (item) => {
-<<<<<<< HEAD
-        setIndexPile(pileIndex);
-        if (dragCards.current) {
-          pile.splice(pile.length, 0, ...dragCards.current);
-        } else {
-          setDragCard(item);
-          pile.push(item);
-=======
         if (cardsToArrange.flat().indexOf(item) !== -1) {
           setCardsToArrange(
             insertExtractedCards(
@@ -68,7 +51,6 @@ function ArrangePile({
               return pileIndex === i.toString() ? [...pile, item] : pile;
             }),
           );
->>>>>>> 1762117 (dnd finished)
         }
       },
       canDrop: (item) => {
@@ -86,28 +68,9 @@ function ArrangePile({
         draggingCard: monitor.getItem(),
       }),
     }),
-<<<<<<< HEAD
-    [dragCards, pile, cards, pileIndex,dragCard,pickPile],
-  );
-
-  useEffect(() => {
-    if (draggingCard) {
-      dragCards.current = dragCardsList(draggingCard, cards);
-    }
-    if (indexPile &&dragCards.current) {
-      removeExtractedCards(cards, setCards, dragCards, indexPile);
-      setIndexPile(null);
-    }
-    if(dragCard){
-      setPickPile(prev => prev.filter(cart=> cart.id !== dragCard.id))
-    }
-  }, [draggingCard, cards, indexPile, setCards, setIndexPile, dragCards,dragCard,setPickPile]);
-
-=======
     [cardsToArrange],
   );
 
->>>>>>> 1762117 (dnd finished)
   if (pile.includes(selectedCards[0])) {
     addSelectedToCards(pile, selectedCards);
   } else {
@@ -159,12 +122,8 @@ const Pile = styled.div`
   border: ${({ isOver }) => (isOver ? 'solid 2px blue' : 'none')};
 `;
 
-<<<<<<< HEAD
-export default ArrangePile;
-=======
 const Layer = styled.div`
   opacity: ${({ hovering }) => (hovering ? '.5' : '1')};
 `;
 
 export default memo(ArrangePile);
->>>>>>> 1762117 (dnd finished)
