@@ -9,10 +9,10 @@ export function distributeCarts(arr) {
     }
   }
   resultArr.map((pile) => {
-    // if(!pile[pile.length - 1].hasOwnProperty('displayed')) 
-    pile[pile.length - 1].displayed = true
-  return pile;
-  })
+    // if(!pile[pile.length - 1].hasOwnProperty('displayed'))
+    pile[pile.length - 1].displayed = true;
+    return pile;
+  });
   return resultArr;
 }
 // arranging cards from a pile to another pile by (adding and removing cards)
@@ -23,81 +23,36 @@ export function arrangingCards(cards, selectedCards, setCards) {
       selectedCards[0].color !== selectedCards[1].color) ||
     typeof selectedCards[1] === 'string'
   ) {
+    cards.map((pile) => {
+      if (pile.includes(selectedCards[0])) {
+        arr = pile.slice(pile.indexOf(selectedCards[0]));
 
-    cards.map((pile) => { 
-    //   if (!cards.includes(selectedCards[0]) && pile.includes(selectedCards[1])) {
-    //   console.log('COUCOU');
-    //   console.log(selectedCards[0]);
-    //   console.log(pile);
-    //   pile = [...pile,selectedCards[0]]
-    //   console.log(pile);
+        const res = cards.map((pile, i) => {
+          if (pile.includes(selectedCards[0])) {
+            pile.splice(pile.indexOf(selectedCards[0]));
+          }
+          if (
+            pile.includes(selectedCards[1]) ||
+            selectedCards[1] === i.toString()
+          ) {
+            pile = [...pile, ...arr];
+          }
 
-
-    //   const res = cards.map((pile, i) => {
-    //     if (pile.includes(selectedCards[1])) {
-    //       pile = [...pile,selectedCards[0]]
-    //       //  var test = selectedCards[0]
-    //       // console.log(test)
-
-    //       //  test.id -=  1
-
-    //       arrangingGoalCards(cards, selectedCards)
-    //     }
-      
-  
-    //     // display the last card of each pile by adding displayed property
-    //     if (pile.length > 0 && !pile[pile.length - 1].displayed) {
-    //       pile[pile.length - 1].displayed = true;
-    //     }
-    //     return pile;
-    //   });
-    //   setCards(res);
-
-
-
-
-    //   }
-    //   else 
-    if (pile.includes(selectedCards[0])) {
-                      arr = pile.slice(pile.indexOf(selectedCards[0]));
-
-
-
-
-                      const res = cards.map((pile, i) => {
-
-                        if (pile.includes(selectedCards[0])) {
-                          pile.splice(pile.indexOf(selectedCards[0]));
-                        }
-                        if (
-                          pile.includes(selectedCards[1]) ||
-                          selectedCards[1] === i.toString()
-                        ) {
-                          pile = [...pile, ...arr];
-                        }
-                      
-                  
-                        // display the last card of each pile by adding displayed property
-                        if (pile.length > 0 && !pile[pile.length - 1].displayed) {
-                          pile[pile.length - 1].displayed = true;
-                        }
-                        return pile;
-                      });
-                      setCards(res);
-
-
+          // display the last card of each pile by adding displayed property
+          if (pile.length > 0 && !pile[pile.length - 1].displayed) {
+            pile[pile.length - 1].displayed = true;
+          }
+          return pile;
+        });
+        setCards(res);
       }
       return pile;
-  });
+    });
   }
 }
 
-
 export function arrangingGoalCards(cards, selectedCards, setCards) {
-
-
   let arr = [];
-
 
   cards.map((pile) => {
     if (pile.includes(selectedCards[0])) {
@@ -137,7 +92,7 @@ export function dragCardsList(draggingCard, cards) {
       return p;
     });
   }
-  
+
   return sliced;
 }
 export function insertExtractedCards(cards, indexPile, draggingCards) {
@@ -145,3 +100,5 @@ export function insertExtractedCards(cards, indexPile, draggingCards) {
     indexPile === i.toString() ? (pile = [...pile, ...draggingCards]) : pile,
   );
 }
+
+//  "homepage": "https://Sifelddin.github.io/solitaire_react",

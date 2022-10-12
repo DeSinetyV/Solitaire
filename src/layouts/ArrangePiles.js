@@ -12,13 +12,10 @@ function ArrangePiles({
   setCardsToArrange,
   pickPile,
   setPickPile,
-  goalCards,
   setGoalCards,
 }) {
   useEffect(() => {
     if (selectedCards.length === 2) {
-      console.log(selectedCards);
-
       arrangingCards(cardsToArrange, selectedCards, setCardsToArrange);
       if (
         (selectedCards[0].number + 1 === selectedCards[1].number &&

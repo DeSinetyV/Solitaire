@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function CardPlaceholder({ category, setAddToGoalPile }) {
+function CardPlaceholder({ category }) {
   return (
     <Placeholder>
       <img

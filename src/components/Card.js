@@ -1,31 +1,55 @@
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDrag } from 'react-dnd';
 
-function Card({ cart, setSelectedCards, cartIndex, setAddToGoalPile }) {
+function Card({
+  card,
+  setSelectedCards,
+  cartIndex,
+  setAddToGoalPile,
+  selectedCards,
+}) {
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: 'CARD',
-      item: cart,
+      item: card,
       beginDrag: (item) => item,
-      canDrag: cart.displayed === true,
+      canDrag: card.displayed === true,
       collect: (monitor) => ({
         isDragging: !!monitor.isDragging(),
         item: monitor.getItem(),
       }),
     }),
-    [cart.displayed, cart],
+    [card.displayed, card],
   );
+
+  useEffect(() => {
+    // console.log(selectedCards);
+    // if (selectedCards.length > 0) {
+    //   if (card.id !== selectedCards[0].id && Object.hasOwn(card, 'selected')) {
+    //     delete card.selected;
+    //   }
+    // }
+    if (selectedCards.length === 0) {
+      delete card.selected;
+    }
+  }, [selectedCards, card, card.selected]);
+
   return (
     <Frame
       isDragging={isDragging}
-      displayed={cart.displayed}
-      selected={cart.selected}
+      displayed={card.displayed}
+      selected={card.selected}
       cartIndex={cartIndex}
       onClick={(e) => {
-        if (cart.displayed) {
-          e.stopPropagation();
-          setSelectedCards((prev) => [...prev, cart]);
+        e.stopPropagation();
+        if (card.displayed) {
+          setSelectedCards((prev) => {
+            if (prev.length === 0) {
+              card.selected = true;
+            }
+            return [...prev, card];
+          });
         }
       }}
     >
@@ -35,11 +59,11 @@ function Card({ cart, setSelectedCards, cartIndex, setAddToGoalPile }) {
           if (setAddToGoalPile) setAddToGoalPile(true);
         }}
         src={
-          cart.displayed
-            ? `images/CardsFaces/${cart.category}/${cart.image}`
+          card.displayed
+            ? `images/CardsFaces/${card.category}/${card.image}`
             : 'images/CardsFaces/back_card.jpg'
         }
-        alt={`${cart.category}/${cart.img}`}
+        alt={`${card.category}/${card.image}`}
       />
     </Frame>
   );
@@ -47,9 +71,9 @@ function Card({ cart, setSelectedCards, cartIndex, setAddToGoalPile }) {
 
 const Frame = styled.div`
   display: ${({ isDragging }) => (isDragging ? 'none' : 'auto')};
-  width: 4rem;
+  width: 100px;
   cursor: ${({ displayed }) => (displayed ? 'pointer' : 'auto')};
-  box-shadow: ${({ selected }) => (selected ? '0 0 10px orange' : 'none')};
+  box-shadow: ${({ selected }) => (selected ? '0 0 20px orange' : 'none')};
   border-radius: 0.4rem;
   ${({ cartIndex }) =>
     cartIndex ? `position: absolute; top: ${Number(cartIndex) * 15}px` : ''};
@@ -60,4 +84,4 @@ const Frame = styled.div`
   }
 `;
 
-export default Card;
+export default memo(Card);

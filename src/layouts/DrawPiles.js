@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import '../style/Pile.css';
 import CardPlaceholder from '../components/CardPlaceholder';
 
-function Draw({ pickPile, setSelectedCards }) {
+function Draw({ pickPile, setSelectedCards, selectedCards }) {
+  console.log('render');
   const [compteur, setCompteur] = useState(0);
   useEffect(() => {
     if (compteur === pickPile.length) {
@@ -17,7 +18,7 @@ function Draw({ pickPile, setSelectedCards }) {
   if (pickCart) {
     pickCart.displayed = true; // Affiche la carte
   }
-
+  console.log(pickCart);
   return (
     <Container>
       <PickPile
@@ -41,7 +42,11 @@ function Draw({ pickPile, setSelectedCards }) {
       </PickPile>
       {pickPile.length > 0 ? (
         <CardFrame>
-          <Card cart={pickCart} setSelectedCards={setSelectedCards} />
+          <Card
+            card={pickCart}
+            setSelectedCards={setSelectedCards}
+            selectedCards={selectedCards}
+          />
         </CardFrame>
       ) : (
         <CardFrame>

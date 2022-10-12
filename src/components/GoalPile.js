@@ -68,7 +68,7 @@ function GoalPile({
         isOver: !!monitor.isOver(),
       }),
     }),
-    [cardsToArrange],
+    [cardsToArrange, pile],
   );
 
   useEffect(() => {
@@ -113,10 +113,10 @@ function GoalPile({
     return (
       <Pile ref={dropTarget}>
         <Card
-          cart={cards[cards.length - 1]}
+          card={cards[cards.length - 1]}
           setAddToGoalPile={setAddToGoalPile}
-          // cartIndex={i.toString()}
           setSelectedCards={setSelectedCards}
+          selectedCards={selectedCards}
         />
       </Pile>
     );

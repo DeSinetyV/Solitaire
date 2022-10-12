@@ -79,7 +79,7 @@ function ArrangePile({
   if (pile.length > 0) {
     return (
       <Pile isOver={isOver} ref={dropTarget}>
-        {pile.map((cart, i) => {
+        {pile.map((card, i) => {
           return (
             <Layer
               key={i.toString()}
@@ -92,10 +92,11 @@ function ArrangePile({
               }
             >
               <Card
-                key={cart.id}
-                cart={cart}
+                key={card.id}
+                card={card}
                 cartIndex={i.toString()}
                 setSelectedCards={setSelectedCards}
+                selectedCards={selectedCards}
               />
             </Layer>
           );

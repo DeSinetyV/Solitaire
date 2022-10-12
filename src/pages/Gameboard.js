@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CARDS } from '../data';
 import ArrangePiles from '../layouts/ArrangePiles';
@@ -13,7 +13,8 @@ function Gameboard() {
   );
   const [pickPileCards, setPickPileCards] = useState(CARDS.slice(28));
   const [selectedCards, setSelectedCards] = useState([]);
-  //const [boardClick, setBoardClick] = useState(false);
+
+  const [boardClick, setBoardClick] = useState(false);
   const [goalCards, setGoalCards] = useState([
     { category: 'clubs', cards: [] },
     { category: 'diamonds', cards: [] },
@@ -21,13 +22,20 @@ function Gameboard() {
     { category: 'spades', cards: [] },
   ]);
 
+  useEffect(() => {
+    if (boardClick) {
+      setSelectedCards([]);
+      setBoardClick(false);
+    }
+  }, [boardClick]);
   return (
-    <GameboardContainer>
+    <GameboardContainer onClick={() => setBoardClick(true)}>
       <Board>
         <TopContent>
           <Draw
             pickPile={pickPileCards}
             setSelectedCards={setSelectedCards}
+            selectedCards={selectedCards}
           ></Draw>
           <GoalPiles
             cardsToArrange={cardsToArrange}
