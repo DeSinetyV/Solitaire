@@ -15,9 +15,8 @@ moment ➜ [moment](https://momentjs.com/)
 take a look at : [solitaire](https://sifelddin.github.io/solitaire_react/)
 
 
-#Quick Start
 
-## Available Scripts
+## Quick Start : Available Scripts
 
 In the project directory, you can run:
 
