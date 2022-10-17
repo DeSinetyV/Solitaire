@@ -4,17 +4,19 @@ import styled from 'styled-components';
 function CardPlaceholder({ category }) {
   return (
     <Placeholder>
-      <img
-        src={category && `images/CardsFaces/${category}/${category}.png`}
-        alt={category && `${category}`}
-      />
+      {category && (
+        <img
+          src={`images/CardsFaces/${category}/${category}.png`}
+          alt={`${category}`}
+        />
+      )}
     </Placeholder>
   );
 }
 
 const Placeholder = styled.div`
   width: 100px;
-  height: 150px;
+  height: 145px;
   border: 2px orange solid;
   border-radius: 0.6rem;
   display: flex;

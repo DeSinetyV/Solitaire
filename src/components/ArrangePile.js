@@ -1,11 +1,7 @@
 import React, { memo } from 'react';
 import { useDrop } from 'react-dnd';
 import styled from 'styled-components';
-import {
-  addSelectedToCards,
-  dragCardsList,
-  insertExtractedCards,
-} from '../utils';
+import { dragCardsList, insertExtractedCards } from '../utils';
 import Card from './Card';
 import CardPlaceholder from './CardPlaceholder';
 
@@ -20,7 +16,7 @@ function ArrangePile({
   setPickPile,
   setGoalCards,
 }) {
-  const [{ isOver, draggingCard }, dropTarget] = useDrop(
+  const [{ isOver, canDrop, draggingCard }, dropTarget] = useDrop(
     () => ({
       accept: 'CARD',
       drop: (item) => {
@@ -65,20 +61,15 @@ function ArrangePile({
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
         draggingCard: monitor.getItem(),
+        canDrop: monitor.canDrop(),
       }),
     }),
     [cardsToArrange],
   );
 
-  if (pile.includes(selectedCards[0])) {
-    addSelectedToCards(pile, selectedCards);
-  } else {
-    pile.map((card) => delete card.selected);
-  }
-
   if (pile.length > 0) {
     return (
-      <Pile isOver={isOver} ref={dropTarget}>
+      <Pile ref={dropTarget}>
         {pile.map((card, i) => {
           return (
             <Layer
@@ -92,6 +83,8 @@ function ArrangePile({
               }
             >
               <Card
+                isOver={isOver}
+                canDrop={canDrop}
                 key={card.id}
                 card={card}
                 cartIndex={i.toString()}
@@ -105,25 +98,38 @@ function ArrangePile({
     );
   }
   return (
-    <div
+    <PlaceHolderFrame
+      canDrop={canDrop}
+      isOver={isOver}
       ref={dropTarget}
       onClick={() => {
-        setSelectedCards((prev) => [...prev, pileIndex]);
+        setSelectedCards((prev) => [...prev, Number(pileIndex)]);
       }}
     >
       <CardPlaceholder />
-    </div>
+    </PlaceHolderFrame>
   );
 }
 
 const Pile = styled.div`
   width: 100px;
+  height: 100%;
   position: relative;
-  border: ${({ isOver }) => (isOver ? 'solid 2px blue' : 'none')};
 `;
 
 const Layer = styled.div`
   opacity: ${({ hovering }) => (hovering ? '.5' : '1')};
+`;
+
+const PlaceHolderFrame = styled.div`
+  cursor: pointer;
+  border-radius: 0.6rem;
+  box-shadow: ${({ isOver, canDrop }) =>
+    canDrop && isOver
+      ? '0 0 10px rgba(0, 255, 0, 1)'
+      : isOver
+      ? '0 0 10px orange'
+      : 'none'};
 `;
 
 export default memo(ArrangePile);

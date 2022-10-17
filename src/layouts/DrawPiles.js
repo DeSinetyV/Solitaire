@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import styled from 'styled-components';
-import '../style/Pile.css';
 import CardPlaceholder from '../components/CardPlaceholder';
 
-function Draw({ pickPile, setSelectedCards, selectedCards }) {
-  console.log('render');
+function Draw({ pickPile, setSelectedCards, selectedCards, boardClick }) {
   const [compteur, setCompteur] = useState(0);
+
   useEffect(() => {
     if (compteur === pickPile.length) {
       // Retour à 0 du compteur
@@ -18,7 +17,7 @@ function Draw({ pickPile, setSelectedCards, selectedCards }) {
   if (pickCart) {
     pickCart.displayed = true; // Affiche la carte
   }
-  console.log(pickCart);
+
   return (
     <Container>
       <PickPile
@@ -46,6 +45,7 @@ function Draw({ pickPile, setSelectedCards, selectedCards }) {
             card={pickCart}
             setSelectedCards={setSelectedCards}
             selectedCards={selectedCards}
+            boardClick={boardClick}
           />
         </CardFrame>
       ) : (
@@ -57,14 +57,16 @@ function Draw({ pickPile, setSelectedCards, selectedCards }) {
   );
 }
 const Container = styled.div`
-  position: relative;
-  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  width: 100%;
 `;
 const PileCard = styled.div`
   .cart {
     cursor: pointer;
     width: 100px;
-    height: 150px;
+    height: 145px;
     border: 2px white solid;
     border-radius: 0.6rem;
   }
@@ -73,14 +75,8 @@ const PileCard = styled.div`
   left: ${({ index }) => `${index / 3}px`};
 `;
 
-const PickPile = styled.div`
-  position: absolute;
-  top: 0;
-  left: 10%;
-`;
+const PickPile = styled.div``;
 const CardFrame = styled.div`
-  position: absolute;
-  top: 5%;
-  right: 50%;
+  margin-top: 5px;
 `;
 export default Draw;

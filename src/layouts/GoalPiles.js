@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import CardPlaceholder from '../components/CardPlaceholder';
 import GoalPile from '../components/GoalPile';
-// import { arrangingCards } from '../utils';
 
 function GoalPiles({
   selectedCards,
@@ -38,8 +36,7 @@ function GoalPiles({
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1rem;
-  width: 67%;
+  grid-gap: 1.4rem;
 `;
 
 export default GoalPiles;

@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
 import { React } from 'react';
-import { arrangingGoalCards } from '../utils';
 import Card from './Card';
 import styled from 'styled-components';
 import CardPlaceholder from './CardPlaceholder';
@@ -16,9 +14,8 @@ function GoalPile({
   setPickPileCards,
   pickPileCards,
 }) {
-  const [addToGoalPile, setAddToGoalPile] = useState(false);
   const { category, cards } = pile;
-  const [{ isOver }, dropTarget] = useDrop(
+  const [{ isOver, canDrop }, dropTarget] = useDrop(
     () => ({
       accept: 'CARD',
       drop: (item) => {
@@ -66,77 +63,62 @@ function GoalPile({
       },
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
+        canDrop: monitor.canDrop(),
       }),
     }),
     [cardsToArrange, pile],
   );
 
-  useEffect(() => {
-    if (selectedCards.length > 0 && addToGoalPile) {
-      if (
-        ((selectedCards[0].number === 1 && cards.length === 0) ||
-          (selectedCards[0].number > 1 &&
-            selectedCards[0].number + 1 === selectedCards[1].number)) &&
-        selectedCards[0].category === category
-      ) {
-        arrangingGoalCards(cardsToArrange, selectedCards, setCardsToArrange);
-        setGoalCards((prev) =>
-          prev.map((pile) =>
-            pile.category === category
-              ? { category: category, cards: [...pile.cards, selectedCards[0]] }
-              : pile,
-          ),
-        );
-        setSelectedCards([]);
-        setAddToGoalPile(false);
-      } else {
-        setAddToGoalPile(false);
-        setSelectedCards([]);
-      }
-    }
-
-    // if (cards.length > 0) {
-    //   setLastPileCards([...cards].pop());
-    // }
-  }, [
-    selectedCards,
-    cards,
-    category,
-    setSelectedCards,
-    addToGoalPile,
-    cardsToArrange,
-    setCardsToArrange,
-    setGoalCards,
-  ]);
-
   if (cards.length > 0) {
     return (
-      <Pile ref={dropTarget}>
-        <Card
-          card={cards[cards.length - 1]}
-          setAddToGoalPile={setAddToGoalPile}
-          setSelectedCards={setSelectedCards}
-          selectedCards={selectedCards}
-        />
+      <Pile ref={dropTarget} isOver={isOver}>
+        {cards.map((card, i) => (
+          <Card
+            key={card.id}
+            canDrop={canDrop}
+            isOver={isOver}
+            goalCartIndex={i}
+            card={card}
+            setSelectedCards={setSelectedCards}
+            selectedCards={selectedCards}
+          />
+        ))}
       </Pile>
     );
   }
   return (
-    <div
-      ref={dropTarget}
-      onClick={() => {
-        setAddToGoalPile(true);
+    <PlaceHolderFrame
+      isOver={isOver}
+      canDrop={canDrop}
+      onClick={(e) => {
+        e.stopPropagation();
+        setSelectedCards((prev) => [...prev, category]);
       }}
+      ref={dropTarget}
     >
       <CardPlaceholder category={category} />
-    </div>
+    </PlaceHolderFrame>
   );
 }
 
 const Pile = styled.div`
-  height: 200px;
   width: 100px;
   position: relative;
+  box-shadow: ${({ isOver, canDrop }) =>
+    canDrop && isOver
+      ? '0 0 10px rgba(0, 255, 0, 1)'
+      : isOver
+      ? '0 0 10px orange'
+      : 'none'};
 `;
-
+const PlaceHolderFrame = styled.div`
+  cursor: pointer;
+  border-radius: 0.6rem;
+  box-shadow: ${({ isOver, canDrop }) =>
+    canDrop && isOver
+      ? '0 0 10px rgba(0, 255, 0, 1)'
+      : isOver
+      ? '0 0 10px orange'
+      : 'none'};
+`;
 export default GoalPile;

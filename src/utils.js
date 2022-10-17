@@ -9,7 +9,6 @@ export function distributeCarts(arr) {
     }
   }
   resultArr.map((pile) => {
-    // if(!pile[pile.length - 1].hasOwnProperty('displayed'))
     pile[pile.length - 1].displayed = true;
     return pile;
   });
@@ -21,20 +20,20 @@ export function arrangingCards(cards, selectedCards, setCards) {
   if (
     (selectedCards[0].number + 1 === selectedCards[1].number &&
       selectedCards[0].color !== selectedCards[1].color) ||
-    typeof selectedCards[1] === 'string'
+    typeof selectedCards[1] === 'number'
   ) {
     cards.map((pile) => {
       if (pile.includes(selectedCards[0])) {
         arr = pile.slice(pile.indexOf(selectedCards[0]));
-
+        arr = arr.map((card) => {
+          delete card.selected;
+          return card;
+        });
         const res = cards.map((pile, i) => {
           if (pile.includes(selectedCards[0])) {
             pile.splice(pile.indexOf(selectedCards[0]));
           }
-          if (
-            pile.includes(selectedCards[1]) ||
-            selectedCards[1] === i.toString()
-          ) {
+          if (pile.includes(selectedCards[1]) || selectedCards[1] === i) {
             pile = [...pile, ...arr];
           }
 
@@ -50,18 +49,137 @@ export function arrangingCards(cards, selectedCards, setCards) {
     });
   }
 }
+export const insertToGoalPileWithClick = (
+  setGoalCards,
+  selectedCards,
+  pickPileCards,
+  setPickPileCards,
+  setCardsToArrange,
+) => {
+  setGoalCards((prev) =>
+    prev.map((pile) => {
+      const { category, cards } = pile;
+      if (
+        category === selectedCards[0].category &&
+        (selectedCards[0].number === 1 ||
+          cards[cards.length - 1]?.number + 1 === selectedCards[0].number)
+      ) {
+        pile = {
+          category: category,
+          cards: [...cards, selectedCards[0]],
+        };
+        pickPileCards.indexOf(selectedCards[0]) !== -1
+          ? setPickPileCards((prev) =>
+              prev.filter((card) => card.id !== selectedCards[0].id),
+            )
+          : setCardsToArrange((prev) =>
+              prev.map((pile) => {
+                let newPile = pile.filter(
+                  (card) => card.id !== selectedCards[0].id,
+                );
+                if (
+                  newPile.length > 0 &&
+                  !Object.hasOwn(newPile[newPile.length - 1], 'displayed')
+                ) {
+                  newPile[newPile.length - 1].displayed = true;
+                }
+                return newPile;
+              }),
+            );
+      }
+      return pile;
+    }),
+  );
+};
+export const insertToGoalPile = (
+  selectedCards,
+  setGoalCards,
+  setPickPileCards,
+  setCardsToArrange,
+  pickPileCards,
+) => {
+  if (
+    (selectedCards[1] === selectedCards[0].category &&
+      selectedCards[0].number === 1) ||
+    (selectedCards[0].number === selectedCards[1].number + 1 &&
+      selectedCards[0].category === selectedCards[1].category)
+  ) {
+    setGoalCards((prev) =>
+      prev.map((pile) => {
+        if (
+          pile.category === selectedCards[1] ||
+          pile.category === selectedCards[0].category
+        ) {
+          pile = {
+            category: selectedCards[0].category,
+            cards: [...pile.cards, selectedCards[0]],
+          };
+          pickPileCards.indexOf(selectedCards[0]) !== -1
+            ? setPickPileCards((prev) =>
+                prev.filter((card) => card.id !== selectedCards[0].id),
+              )
+            : setCardsToArrange((prev) =>
+                prev.map((pile) => {
+                  let newPile = pile.filter(
+                    (card) => card.id !== selectedCards[0].id,
+                  );
+                  if (
+                    newPile.length > 0 &&
+                    !Object.hasOwn(newPile[newPile.length - 1], 'displayed')
+                  ) {
+                    newPile[newPile.length - 1].displayed = true;
+                  }
+                  return newPile;
+                }),
+              );
+        }
+        return pile;
+      }),
+    );
+  }
+};
 
-export function arrangingGoalCards(cards, selectedCards, setCards) {
-  let arr = [];
-
-  cards.map((pile) => {
-    if (pile.includes(selectedCards[0])) {
-      arr = pile.pop();
-      if (pile.length > 0) pile[pile.length - 1].displayed = true;
-    }
-    return pile;
-  });
-}
+export const insertToCardsToArrange = (
+  selectedCards,
+  setCardsToArrange,
+  setPickPileCards,
+  setGoalCards,
+  pickPileCards,
+) => {
+  if (
+    (selectedCards[0].number + 1 === selectedCards[1].number &&
+      selectedCards[0].color !== selectedCards[1].color) ||
+    typeof selectedCards[1] === 'number'
+  ) {
+    setCardsToArrange((prev) =>
+      prev.map((pile, i) => {
+        if (pile.indexOf(selectedCards[1]) !== -1) {
+          pile = [...pile, selectedCards[0]];
+        }
+        if (i === selectedCards[1]) {
+          pile = [...pile, selectedCards[0]];
+        }
+        return pile;
+      }),
+    );
+    pickPileCards.indexOf(selectedCards[0]) !== -1
+      ? setPickPileCards((prev) =>
+          prev.filter((card) => card.id !== selectedCards[0].id),
+        )
+      : setGoalCards((prev) =>
+          prev.map((pile) =>
+            pile.cards.indexOf(selectedCards[0]) !== -1
+              ? {
+                  category: pile.category,
+                  cards: pile.cards.filter(
+                    (card) => card.id !== selectedCards[0].id,
+                  ),
+                }
+              : pile,
+          ),
+        );
+  }
+};
 
 // add selected property to the displayed cards for highlighting them
 export function addSelectedToCards(pile, selectedCards) {

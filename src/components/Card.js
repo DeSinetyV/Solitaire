@@ -1,14 +1,17 @@
 import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDrag } from 'react-dnd';
+import { useBoardClick } from '../Context/BoardContext';
 
 function Card({
   card,
   setSelectedCards,
   cartIndex,
-  setAddToGoalPile,
-  selectedCards,
+  isOver,
+  canDrop,
+  goalCartIndex,
 }) {
+  const { boardClick } = useBoardClick();
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: 'CARD',
@@ -24,40 +27,37 @@ function Card({
   );
 
   useEffect(() => {
-    // console.log(selectedCards);
-    // if (selectedCards.length > 0) {
-    //   if (card.id !== selectedCards[0].id && Object.hasOwn(card, 'selected')) {
-    //     delete card.selected;
-    //   }
-    // }
-    if (selectedCards.length === 0) {
+    if (boardClick && card.selected) {
       delete card.selected;
     }
-  }, [selectedCards, card, card.selected]);
+  }, [card, card.selected, boardClick]);
 
   return (
     <Frame
+      isOver={isOver}
+      canDrop={canDrop}
       isDragging={isDragging}
       displayed={card.displayed}
       selected={card.selected}
       cartIndex={cartIndex}
+      goalCartIndex={goalCartIndex}
       onClick={(e) => {
-        e.stopPropagation();
         if (card.displayed) {
+          e.stopPropagation();
           setSelectedCards((prev) => {
             if (prev.length === 0) {
               card.selected = true;
             }
             return [...prev, card];
+            // else {
+            //   return prev[0].id !== card.id ? [...prev, card] : prev;
+            // }
           });
         }
       }}
     >
       <img
         ref={drag}
-        onClick={() => {
-          if (setAddToGoalPile) setAddToGoalPile(true);
-        }}
         src={
           card.displayed
             ? `images/CardsFaces/${card.category}/${card.image}`
@@ -73,10 +73,19 @@ const Frame = styled.div`
   display: ${({ isDragging }) => (isDragging ? 'none' : 'auto')};
   width: 100px;
   cursor: ${({ displayed }) => (displayed ? 'pointer' : 'auto')};
-  box-shadow: ${({ selected }) => (selected ? '0 0 20px orange' : 'none')};
+  box-shadow: ${({ selected, isOver, canDrop }) =>
+    canDrop && isOver
+      ? '0 0 10px rgba(0, 255, 0, 1)'
+      : selected || isOver
+      ? '0 0 10px orange'
+      : 'none'};
   border-radius: 0.4rem;
-  ${({ cartIndex }) =>
-    cartIndex ? `position: absolute; top: ${Number(cartIndex) * 15}px` : ''};
+  ${({ cartIndex, goalCartIndex }) =>
+    goalCartIndex
+      ? `position: absolute; top:0`
+      : cartIndex
+      ? `position: absolute; top: ${Number(cartIndex) * 15}px`
+      : ''};
   img {
     width: 100px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.7);
