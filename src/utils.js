@@ -49,6 +49,8 @@ export function arrangingCards(cards, selectedCards, setCards) {
     });
   }
 }
+
+//  select the same card with double click and inserting to goal piles
 export const insertToGoalPileWithClick = (
   setGoalCards,
   selectedCards,
@@ -91,6 +93,8 @@ export const insertToGoalPileWithClick = (
     }),
   );
 };
+
+//from arranging piles or pick pile to goal piles
 export const insertToGoalPile = (
   selectedCards,
   setGoalCards,
@@ -139,6 +143,7 @@ export const insertToGoalPile = (
   }
 };
 
+//insert cards to arranging piles from goal piles or pick pile
 export const insertToCardsToArrange = (
   selectedCards,
   setCardsToArrange,

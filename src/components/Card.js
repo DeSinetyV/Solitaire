@@ -49,9 +49,6 @@ function Card({
               card.selected = true;
             }
             return [...prev, card];
-            // else {
-            //   return prev[0].id !== card.id ? [...prev, card] : prev;
-            // }
           });
         }
       }}

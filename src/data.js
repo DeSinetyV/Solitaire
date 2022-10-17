@@ -1,5 +1,6 @@
 import { distributeCarts } from './utils';
 
+// set up the pile of all cards
 export const setCards = () => {
   const setData = (color, category) => {
     let arr = [];
@@ -28,7 +29,6 @@ export const setCards = () => {
 };
 
 //goal Cards data
-
 export const GOALCARDS = [
   { category: 'clubs', cards: [] },
   { category: 'diamonds', cards: [] },
@@ -36,6 +36,7 @@ export const GOALCARDS = [
   { category: 'spades', cards: [] },
 ];
 
+// for restart the game and reset the pile of all cards
 export function reInitialData(
   setCardsToArrange,
   setGoalCards,

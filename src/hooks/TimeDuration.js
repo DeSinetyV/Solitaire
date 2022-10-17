@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 
+
+// custom hook for setting the duration of the game to the right format
 export function useTimer() {
   const [seconds, setSeconds] = useState(0);
   useEffect(() => {
