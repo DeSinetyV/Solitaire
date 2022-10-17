@@ -10,6 +10,13 @@ styled-componets ➜ [styled-components](https://styled-components.com/)
 
 moment ➜ [moment](https://momentjs.com/)
 
+## Game Site : 
+
+take a look at : [solitaire](https://sifelddin.github.io/solitaire_react/)
+
+
+#Quick Start
+
 ## Available Scripts
 
 In the project directory, you can run:
