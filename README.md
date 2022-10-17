@@ -1,6 +1,14 @@
-famous solitaire game with react 
+##the famous solitaire game created with react 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+pakages added to this project :
+
+drag & drop ➜ [react-dnd](https://react-dnd.github.io/react-dnd/docs/api/use-drag)
+
+styled-componets ➜ [styled-components](https://styled-components.com/)
+
+moment ➜ [moment](https://momentjs.com/)
 
 ## Available Scripts
 
