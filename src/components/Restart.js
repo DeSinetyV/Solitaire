@@ -70,13 +70,13 @@ const Container = styled.div`
     padding: 0.3rem 0.6rem;
     cursor: pointer;
     margin-left: 1rem;
-    background-color: rgba(255, 90, 0, 1);
+    background-color: rgba(230, 70, 0, 1);
     color: white;
     letter-spacing: 1px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     :hover {
       background-color: rgba(255, 50, 0, 1);
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.8);
     }
   }
 `;

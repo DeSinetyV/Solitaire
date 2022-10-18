@@ -20,12 +20,12 @@ function Draw({ pickPile, setSelectedCards, selectedCards, boardClick }) {
 
   return (
     <Container>
-      <PickPile
-        onClick={() =>
-          pickPile.length > 0 ? setCompteur((prev) => prev + 1) : ''
-        }
-      >
-        <div style={{ position: 'relative' }}>
+      <PickPile>
+        <div
+          onClick={() =>
+            pickPile.length > 0 ? setCompteur((prev) => prev + 1) : ''
+          }
+        >
           {pickPile.map((card, i) => {
             return (
               <PileCard key={i} index={i}>
@@ -59,7 +59,6 @@ function Draw({ pickPile, setSelectedCards, selectedCards, boardClick }) {
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-
   width: 100%;
 `;
 const PileCard = styled.div`
@@ -75,8 +74,9 @@ const PileCard = styled.div`
   left: ${({ index }) => `${index / 3}px`};
 `;
 
-const PickPile = styled.div``;
-const CardFrame = styled.div`
-  margin-top: 5px;
+const PickPile = styled.div`
+  position: relative;
+  top: -5px;
 `;
+const CardFrame = styled.div``;
 export default Draw;
