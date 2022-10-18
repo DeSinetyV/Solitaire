@@ -1,8 +1,22 @@
-# Getting Started with Create React App
+## the famous solitaire game created with react 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+pakages added to this project :
+
+drag & drop ➜ [react-dnd](https://react-dnd.github.io/react-dnd/docs/api/use-drag)
+
+styled-componets ➜ [styled-components](https://styled-components.com/)
+
+moment ➜ [moment](https://momentjs.com/)
+
+## Game Site : 
+
+take a look at : [solitaire](https://sifelddin.github.io/solitaire_react/)
+
+
+
+## Quick Start : Available Scripts
 
 In the project directory, you can run:
 
